@@ -1,0 +1,5 @@
+# Credenciales locales de MySQL
+conexion.php
+
+# Configuración personal de VS Code
+.vscode/

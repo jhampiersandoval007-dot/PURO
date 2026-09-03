@@ -1,0 +1,886 @@
+/* =========================================================
+   PURO - LOGIN
+   Sistema Inteligente de Biofiltración Urbana
+   ========================================================= */
+
+
+/* =========================================================
+   CONFIGURACIÓN GENERAL
+   ========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+}
+
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background:
+        radial-gradient(
+            circle at 20% 20%,
+            rgba(46, 125, 50, 0.15),
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at 80% 80%,
+            rgba(76, 175, 80, 0.12),
+            transparent 35%
+        ),
+        linear-gradient(
+            135deg,
+            #07130b,
+            #0d1f13,
+            #102918
+        );
+
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 30px;
+
+    color: #ffffff;
+
+    overflow-x: hidden;
+}
+
+
+/* =========================================================
+   EFECTO DE FONDO
+   ========================================================= */
+
+body::before {
+    content: "";
+    position: fixed;
+
+    width: 420px;
+    height: 420px;
+
+    border-radius: 50%;
+
+    background: rgba(76, 175, 80, 0.08);
+
+    filter: blur(80px);
+
+    top: -180px;
+    left: -150px;
+
+    animation: fondoMovimiento 8s ease-in-out infinite alternate;
+
+    pointer-events: none;
+}
+
+body::after {
+    content: "";
+    position: fixed;
+
+    width: 350px;
+    height: 350px;
+
+    border-radius: 50%;
+
+    background: rgba(139, 195, 74, 0.06);
+
+    filter: blur(70px);
+
+    bottom: -150px;
+    right: -120px;
+
+    animation: fondoMovimiento2 10s ease-in-out infinite alternate;
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   CONTENEDOR PRINCIPAL
+   ========================================================= */
+
+.login-container {
+    width: 100%;
+    max-width: 430px;
+
+    position: relative;
+
+    background: rgba(12, 28, 18, 0.88);
+
+    border: 1px solid rgba(129, 199, 132, 0.18);
+
+    border-radius: 24px;
+
+    padding: 42px 38px 30px;
+
+    box-shadow:
+        0 25px 70px rgba(0, 0, 0, 0.45),
+        0 0 40px rgba(46, 125, 50, 0.08);
+
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+
+    overflow: visible;
+
+    animation: aparecer 0.8s ease forwards;
+}
+
+
+/* Línea decorativa superior */
+
+.login-container::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 15%;
+
+    width: 70%;
+    height: 2px;
+
+    background: linear-gradient(
+        90deg,
+        transparent,
+        #66bb6a,
+        #a5d6a7,
+        #66bb6a,
+        transparent
+    );
+
+    border-radius: 10px;
+
+    opacity: 0.8;
+}
+
+
+/* =========================================================
+   LOGO
+   ========================================================= */
+
+.logo-area {
+    text-align: center;
+    margin-bottom: 28px;
+}
+
+
+/* Icono */
+
+.logo-icon {
+    width: 68px;
+    height: 68px;
+
+    margin: 0 auto 14px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 50%;
+
+    font-size: 32px;
+    color: #a5d6a7;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(102, 187, 106, 0.20),
+            rgba(46, 125, 50, 0.05)
+        );
+
+    border: 1px solid rgba(129, 199, 132, 0.25);
+
+    box-shadow:
+        0 0 25px rgba(76, 175, 80, 0.15);
+
+    animation: logoFlotar 4s ease-in-out infinite;
+}
+
+
+/* Nombre PURO */
+
+.logo-area h1 {
+    font-size: 38px;
+
+    font-weight: 800;
+
+    letter-spacing: 6px;
+
+    color: #e8f5e9;
+
+    margin-bottom: 8px;
+
+    text-shadow:
+        0 0 20px rgba(129, 199, 132, 0.18);
+}
+
+
+/* Subtítulo */
+
+.logo-area h2 {
+    font-size: 13px;
+
+    font-weight: 400;
+
+    line-height: 1.5;
+
+    color: #a5b8aa;
+
+    max-width: 300px;
+
+    margin: auto;
+}
+
+
+/* =========================================================
+   LÍNEA
+   ========================================================= */
+
+.linea {
+    width: 70px;
+    height: 2px;
+
+    margin: 22px auto 0;
+
+    background: linear-gradient(
+        90deg,
+        transparent,
+        #66bb6a,
+        transparent
+    );
+
+    border-radius: 10px;
+}
+
+
+/* =========================================================
+   TÍTULO DE ACCESO
+   ========================================================= */
+
+.login-container h3 {
+    text-align: center;
+
+    font-size: 21px;
+
+    font-weight: 600;
+
+    color: #e8f5e9;
+
+    margin-bottom: 25px;
+}
+
+
+/* =========================================================
+   MENSAJE
+   ========================================================= */
+
+.mensaje {
+    background: rgba(198, 40, 40, 0.12);
+
+    border: 1px solid rgba(239, 83, 80, 0.30);
+
+    color: #ffb4b4;
+
+    padding: 12px 14px;
+
+    border-radius: 10px;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+
+    text-align: center;
+
+    margin-bottom: 20px;
+
+    animation: mensajeEntrada 0.4s ease;
+}
+
+
+/* =========================================================
+   FORMULARIO
+   ========================================================= */
+
+form {
+    width: 100%;
+}
+
+
+/* Grupo */
+
+.form-grupo {
+    margin-bottom: 20px;
+}
+
+
+/* Etiquetas */
+
+.form-grupo label {
+    display: block;
+
+    margin-bottom: 8px;
+
+    font-size: 13px;
+
+    font-weight: 500;
+
+    color: #c8d6cb;
+}
+
+
+/* Inputs */
+
+.form-grupo input {
+    width: 100%;
+
+    height: 48px;
+
+    padding: 0 15px;
+
+    border-radius: 11px;
+
+    border: 1px solid rgba(165, 214, 167, 0.15);
+
+    outline: none;
+
+    background: rgba(255, 255, 255, 0.045);
+
+    color: #ffffff;
+
+    font-size: 14px;
+
+    transition:
+        border-color 0.3s ease,
+        background 0.3s ease,
+        box-shadow 0.3s ease,
+        transform 0.3s ease;
+}
+
+
+/* Placeholder */
+
+.form-grupo input::placeholder {
+    color: #718076;
+}
+
+
+/* Focus */
+
+.form-grupo input:focus {
+    border-color: rgba(102, 187, 106, 0.75);
+
+    background: rgba(76, 175, 80, 0.06);
+
+    box-shadow:
+        0 0 0 3px rgba(76, 175, 80, 0.08),
+        0 0 18px rgba(76, 175, 80, 0.08);
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   BOTÓN INGRESAR
+   ========================================================= */
+
+.btn-ingresar {
+    width: 100%;
+
+    height: 52px;
+
+    position: relative;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    margin-top: 8px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    outline: none;
+
+    cursor: pointer;
+
+    overflow: visible;
+
+    isolation: isolate;
+
+    background:
+        linear-gradient(
+            135deg,
+            #2e7d32,
+            #43a047
+        );
+
+    color: #ffffff;
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+    letter-spacing: 0.3px;
+
+    box-shadow:
+        0 8px 20px rgba(46, 125, 50, 0.28);
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        background 0.3s ease;
+}
+
+
+/* Texto del botón */
+
+.btn-ingresar span {
+    position: relative;
+
+    z-index: 10;
+
+    transition:
+        transform 0.3s ease,
+        letter-spacing 0.3s ease;
+}
+
+
+/* Hover botón */
+
+.btn-ingresar:hover {
+    transform: translateY(-2px);
+
+    background:
+        linear-gradient(
+            135deg,
+            #388e3c,
+            #4caf50
+        );
+
+    box-shadow:
+        0 12px 28px rgba(46, 125, 50, 0.40);
+}
+
+
+.btn-ingresar:hover span {
+    letter-spacing: 0.6px;
+}
+
+
+/* Click */
+
+.btn-ingresar:active {
+    transform: translateY(1px);
+
+    box-shadow:
+        0 5px 12px rgba(46, 125, 50, 0.25);
+}
+
+
+/* =========================================================
+   HOJAS DEL BOTÓN
+   ========================================================= */
+
+.btn-ingresar svg {
+    position: absolute;
+
+    width: 28px;
+    height: 28px;
+
+    pointer-events: none;
+
+    opacity: 0;
+
+    z-index: -1;
+
+    transition:
+        opacity 0.3s ease,
+        transform 0.55s cubic-bezier(0.17, 0.67, 0.35, 1.25);
+}
+
+
+/* Color de las hojas */
+
+.fil-leaf-1,
+.fil-leaf-2,
+.fil-leaf-3,
+.fil-leaf-4,
+.fil-leaf-5 {
+    fill: #66bb6a;
+}
+
+
+/* Hoja 1 */
+
+.btn-ingresar .icon-1 {
+    left: 5px;
+    top: 10px;
+
+    transform: translate(0, 0) rotate(0deg) scale(0.3);
+}
+
+
+/* Hoja 2 */
+
+.btn-ingresar .icon-2 {
+    right: 5px;
+    top: 10px;
+
+    transform: translate(0, 0) rotate(0deg) scale(0.3);
+}
+
+
+/* Hoja 3 */
+
+.btn-ingresar .icon-3 {
+    left: 25%;
+    top: 12px;
+
+    transform: translate(0, 0) rotate(0deg) scale(0.3);
+}
+
+
+/* Hoja 4 */
+
+.btn-ingresar .icon-4 {
+    right: 25%;
+    top: 12px;
+
+    transform: translate(0, 0) rotate(0deg) scale(0.3);
+}
+
+
+/* Hoja 5 */
+
+.btn-ingresar .icon-5 {
+    left: 50%;
+    top: 12px;
+
+    transform: translate(-50%, 0) rotate(0deg) scale(0.3);
+}
+
+
+/* =========================================================
+   ANIMACIÓN DE LAS HOJAS
+   ========================================================= */
+
+.btn-ingresar:hover .icon-1 {
+    opacity: 1;
+
+    transform:
+        translate(-34px, -38px)
+        rotate(-35deg)
+        scale(1);
+}
+
+
+.btn-ingresar:hover .icon-2 {
+    opacity: 1;
+
+    transform:
+        translate(34px, -38px)
+        rotate(35deg)
+        scale(1);
+}
+
+
+.btn-ingresar:hover .icon-3 {
+    opacity: 1;
+
+    transform:
+        translate(-45px, 22px)
+        rotate(-55deg)
+        scale(0.9);
+}
+
+
+.btn-ingresar:hover .icon-4 {
+    opacity: 1;
+
+    transform:
+        translate(45px, 22px)
+        rotate(55deg)
+        scale(0.9);
+}
+
+
+.btn-ingresar:hover .icon-5 {
+    opacity: 1;
+
+    transform:
+        translate(-50%, -52px)
+        rotate(15deg)
+        scale(1.05);
+}
+
+
+/* =========================================================
+   INFORMACIÓN DEL SISTEMA
+   ========================================================= */
+
+.sistema-info {
+    margin-top: 28px;
+
+    padding-top: 20px;
+
+    border-top: 1px solid rgba(165, 214, 167, 0.10);
+
+    text-align: center;
+
+    color: #738278;
+
+    font-size: 12px;
+
+    line-height: 1.8;
+}
+
+
+/* Estado */
+
+.estado-sistema {
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 8px;
+
+    color: #9aae9e;
+
+    margin-bottom: 2px;
+}
+
+
+/* Punto verde */
+
+.punto-activo {
+    width: 8px;
+    height: 8px;
+
+    display: inline-block;
+
+    border-radius: 50%;
+
+    background: #66bb6a;
+
+    box-shadow:
+        0 0 8px rgba(102, 187, 106, 0.8);
+
+    animation: puntoPulso 2s ease-in-out infinite;
+}
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.footer-login {
+    text-align: center;
+
+    margin-top: 20px;
+
+    font-size: 11px;
+
+    color: #536158;
+
+    letter-spacing: 0.4px;
+}
+
+
+/* =========================================================
+   ANIMACIONES
+   ========================================================= */
+
+@keyframes aparecer {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(25px)
+            scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+
+}
+
+
+@keyframes logoFlotar {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-5px);
+    }
+
+}
+
+
+@keyframes puntoPulso {
+
+    0%,
+    100% {
+        opacity: 1;
+
+        box-shadow:
+            0 0 6px rgba(102, 187, 106, 0.5);
+    }
+
+    50% {
+        opacity: 0.55;
+
+        box-shadow:
+            0 0 14px rgba(102, 187, 106, 0.9);
+    }
+
+}
+
+
+@keyframes mensajeEntrada {
+
+    from {
+        opacity: 0;
+
+        transform: translateY(-8px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform: translateY(0);
+    }
+
+}
+
+
+@keyframes fondoMovimiento {
+
+    from {
+        transform:
+            translate(0, 0)
+            scale(1);
+    }
+
+    to {
+        transform:
+            translate(80px, 50px)
+            scale(1.2);
+    }
+
+}
+
+
+@keyframes fondoMovimiento2 {
+
+    from {
+        transform:
+            translate(0, 0)
+            scale(1);
+    }
+
+    to {
+        transform:
+            translate(-60px, -40px)
+            scale(1.15);
+    }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 500px) {
+
+    body {
+        padding: 18px;
+    }
+
+    .login-container {
+        padding: 35px 25px 25px;
+
+        border-radius: 20px;
+    }
+
+    .logo-area h1 {
+        font-size: 34px;
+    }
+
+    .logo-area h2 {
+        font-size: 12px;
+    }
+
+    .login-container h3 {
+        font-size: 19px;
+    }
+
+    .btn-ingresar {
+        height: 50px;
+    }
+
+}
+
+
+/* =========================================================
+   PANTALLAS MUY PEQUEÑAS
+   ========================================================= */
+
+@media (max-height: 650px) {
+
+    body {
+        align-items: flex-start;
+
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+
+    .login-container {
+        padding-top: 28px;
+    }
+
+    .logo-area {
+        margin-bottom: 20px;
+    }
+
+    .logo-icon {
+        width: 55px;
+        height: 55px;
+
+        font-size: 26px;
+
+        margin-bottom: 8px;
+    }
+
+    .logo-area h1 {
+        font-size: 30px;
+    }
+
+    .logo-area h2 {
+        font-size: 11px;
+    }
+
+    .linea {
+        margin-top: 14px;
+    }
+
+}
