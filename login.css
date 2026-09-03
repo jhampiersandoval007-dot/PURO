@@ -51,6 +51,8 @@ body {
     color: #ffffff;
 
     overflow-x: hidden;
+
+    isolation: isolate;
 }
 
 
@@ -62,21 +64,38 @@ body::before {
     content: "";
     position: fixed;
 
-    width: 420px;
-    height: 420px;
+    width: min(780px, 82vw);
+    height: 100vh;
 
-    border-radius: 50%;
+    top: 0;
+    right: -80px;
 
-    background: rgba(76, 175, 80, 0.08);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 1000'%3E%3Cg fill='%2375a873'%3E%3Cpath d='M410 1000h-150l78-420-155-185 35-38 136 115 5-245h52l7 203 113-121 35 38-137 190z'/%3E%3Cpath d='M368 515 120 420l16-53 232 70zM410 482l220-153 31 45-224 174zM331 592 88 568l6-55 248 25zM396 585l272-39 8 54-268 58z'/%3E%3Cellipse cx='174' cy='316' rx='135' ry='112'/%3E%3Cellipse cx='339' cy='222' rx='156' ry='132'/%3E%3Cellipse cx='535' cy='269' rx='161' ry='139'/%3E%3Cellipse cx='674' cy='412' rx='126' ry='123'/%3E%3Cellipse cx='176' cy='472' rx='144' ry='119'/%3E%3C/g%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right center;
+    background-size: contain;
 
-    filter: blur(80px);
+    opacity: 0.18;
+    filter: blur(0.4px);
+    mask-image: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(0, 0, 0, 0.15) 22%,
+        #000000 58%,
+        #000000 100%
+    );
+    -webkit-mask-image: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(0, 0, 0, 0.15) 22%,
+        #000000 58%,
+        #000000 100%
+    );
 
-    top: -180px;
-    left: -150px;
-
-    animation: fondoMovimiento 8s ease-in-out infinite alternate;
+    animation: arbolRespira 10s ease-in-out infinite alternate;
 
     pointer-events: none;
+    z-index: -1;
 }
 
 body::after {
@@ -110,6 +129,7 @@ body::after {
     max-width: 430px;
 
     position: relative;
+    z-index: 1;
 
     background: rgba(12, 28, 18, 0.88);
 
@@ -881,6 +901,21 @@ form {
 
     .linea {
         margin-top: 14px;
+    }
+
+}
+
+
+@keyframes arbolRespira {
+
+    from {
+        opacity: 0.13;
+        transform: translateX(12px) scale(0.98);
+    }
+
+    to {
+        opacity: 0.23;
+        transform: translateX(-8px) scale(1.02);
     }
 
 }
