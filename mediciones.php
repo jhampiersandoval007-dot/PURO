@@ -8,7 +8,7 @@ if (!isset($_SESSION["id_usuario"])) {
 }
 
 /* El sistema cuenta con un único prototipo: PURO Centro. */
-$biofiltro_actual = "PURO Centro";
+$biofiltro_actual = "PURO";
 
 $sql = "SELECT
             ts.nombre AS tipo_sensor,

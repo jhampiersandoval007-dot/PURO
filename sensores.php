@@ -170,8 +170,9 @@ $resultado = $conexion->query($sql);
 <div class="contenido">
 
     <div class="encabezado">
+        <span class="etiqueta-panel">Dispositivos del prototipo</span>
         <h1>Gestión de Sensores</h1>
-        <p>Sensores instalados en los biofiltros del sistema PURO</p>
+        <p>Sensores instalados en el único prototipo PURO.</p>
     </div>
 
 

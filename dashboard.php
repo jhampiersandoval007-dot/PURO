@@ -236,7 +236,7 @@ if ($resultadoHumedad && $resultadoHumedad->num_rows > 0) {
 <div class="contenido">
 
     <div class="encabezado">
-
+        <span class="etiqueta-panel">Monitoreo en tiempo real</span>
         <h1>Panel de Monitoreo Ambiental</h1>
 
         <p>
@@ -249,30 +249,33 @@ if ($resultadoHumedad && $resultadoHumedad->num_rows > 0) {
 
     <div class="tarjetas">
 
-        <div class="tarjeta">
+        <div class="tarjeta indicador-co2">
             <h3>CO₂</h3>
 
             <div class="valor">
                 <?php echo htmlspecialchars($co2); ?>
             </div>
+            <span class="detalle-tarjeta">Última lectura registrada</span>
         </div>
 
 
-        <div class="tarjeta">
+        <div class="tarjeta indicador-temperatura">
             <h3>Temperatura</h3>
 
             <div class="valor">
                 <?php echo htmlspecialchars($temperatura); ?>
             </div>
+            <span class="detalle-tarjeta">Condición térmica actual</span>
         </div>
 
 
-        <div class="tarjeta">
+        <div class="tarjeta indicador-humedad">
             <h3>Humedad</h3>
 
             <div class="valor">
                 <?php echo htmlspecialchars($humedad); ?>
             </div>
+            <span class="detalle-tarjeta">Humedad relativa registrada</span>
         </div>
 
     </div>
@@ -286,7 +289,7 @@ if ($resultadoHumedad && $resultadoHumedad->num_rows > 0) {
 
         <p>
             Biofiltro principal:
-            <strong>PURO Norte</strong>
+            <strong>PURO · Inst. Tec. Comercio Alvarez Plata</strong>
         </p>
 
         <br>

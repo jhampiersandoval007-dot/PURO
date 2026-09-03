@@ -170,8 +170,9 @@ $resultado = $conexion->query($sql);
 <div class="contenido">
 
     <div class="encabezado">
+        <span class="etiqueta-panel">Prototipo urbano</span>
         <h1>Gestión de Biofiltros</h1>
-        <p>Biofiltros registrados en el sistema PURO</p>
+        <p>Prototipo registrado en el sistema PURO.</p>
     </div>
 
     <div class="tabla-contenedor">
