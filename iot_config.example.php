@@ -1,0 +1,2 @@
+<?php
+$clave_iot = "REEMPLAZA_CON_UNA_CLAVE_SECRETA_LARGA";

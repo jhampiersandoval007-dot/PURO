@@ -1,5 +1,6 @@
 # Credenciales locales de MySQL
 conexion.php
+iot_config.php
 
 # Configuración personal de VS Code
 .vscode/

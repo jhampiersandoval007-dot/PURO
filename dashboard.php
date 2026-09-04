@@ -26,12 +26,34 @@ $sqlCO2 = "SELECT m.valor, m.unidad
            LIMIT 1";
 
 $resultadoCO2 = $conexion->query($sqlCO2);
-
 $co2 = "Sin datos";
 
 if ($resultadoCO2 && $resultadoCO2->num_rows > 0) {
     $datoCO2 = $resultadoCO2->fetch_assoc();
     $co2 = $datoCO2["valor"] . " " . $datoCO2["unidad"];
+}
+
+/* =========================
+   ÚLTIMA MEDICIÓN DE CALIDAD DEL AIRE
+   ========================= */
+
+$sqlCalidadAire = "SELECT m.valor, m.unidad
+           FROM mediciones m
+           INNER JOIN sensores s
+               ON m.id_sensor = s.id_sensor
+           INNER JOIN tipos_sensores ts
+               ON s.id_tipo_sensor = ts.id_tipo_sensor
+           WHERE ts.nombre = 'Calidad del aire'
+           ORDER BY m.fecha_hora DESC
+           LIMIT 1";
+
+$resultadoCalidadAire = $conexion->query($sqlCalidadAire);
+
+$calidadAire = "Sin datos";
+
+if ($resultadoCalidadAire && $resultadoCalidadAire->num_rows > 0) {
+    $datoCalidadAire = $resultadoCalidadAire->fetch_assoc();
+    $calidadAire = $datoCalidadAire["valor"] . " " . $datoCalidadAire["unidad"];
 }
 
 
@@ -250,10 +272,21 @@ if ($resultadoHumedad && $resultadoHumedad->num_rows > 0) {
     <div class="tarjetas">
 
         <div class="tarjeta indicador-co2">
-            <h3>CO₂</h3>
+            <h3>CO₂ · MG811</h3>
 
             <div class="valor">
                 <?php echo htmlspecialchars($co2); ?>
+            </div>
+            <span class="detalle-tarjeta">
+                Lectura analógica pendiente de calibración
+            </span>
+        </div>
+
+        <div class="tarjeta indicador-co2">
+            <h3>Calidad del aire</h3>
+
+            <div class="valor">
+                <?php echo htmlspecialchars($calidadAire); ?>
             </div>
             <span class="detalle-tarjeta">Última lectura registrada</span>
         </div>
