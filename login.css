@@ -506,6 +506,77 @@ form {
 
 
 /* =========================================================
+   ACCESO COMO INVITADO
+   ========================================================= */
+
+.separador-acceso {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 22px 0 16px;
+    color: #738278;
+    font-size: 12px;
+}
+
+.separador-acceso::before,
+.separador-acceso::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: rgba(165, 214, 167, 0.12);
+}
+
+.form-invitado {
+    width: 100%;
+}
+
+.btn-invitado {
+    width: 100%;
+    min-height: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 9px;
+    border: 1px solid rgba(165, 214, 167, 0.26);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.035);
+    color: #c8d6cb;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    transition: background 0.25s ease, border-color 0.25s ease,
+        color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.btn-invitado:hover {
+    transform: translateY(-2px);
+    border-color: rgba(102, 187, 106, 0.6);
+    background: rgba(76, 175, 80, 0.12);
+    color: #e8f5e9;
+    box-shadow: 0 10px 24px rgba(46, 125, 50, 0.16);
+}
+
+.btn-invitado:active {
+    transform: translateY(1px);
+}
+
+.icono-invitado {
+    color: #66bb6a;
+    font-size: 22px;
+    line-height: 1;
+}
+
+.texto-invitado {
+    margin-top: 10px;
+    color: #738278;
+    font-size: 11px;
+    line-height: 1.5;
+    text-align: center;
+}
+
+
+/* =========================================================
    HOJAS DEL BOTÓN
    ========================================================= */
 

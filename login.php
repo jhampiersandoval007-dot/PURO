@@ -27,8 +27,24 @@ if (isset($_SESSION["bloqueado_hasta"])) {
 // Procesar formulario
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
+    // Acceso de consulta sin crear un usuario en la base de datos
+    if (isset($_POST["acceso_invitado"])) {
+
+        $_SESSION["intentos_login"] = 0;
+        unset($_SESSION["bloqueado_hasta"]);
+
+        $_SESSION["id_usuario"] = 0;
+        $_SESSION["nombre"] = "Invitado";
+        $_SESSION["id_rol"] = null;
+        $_SESSION["es_invitado"] = true;
+
+        session_regenerate_id(true);
+
+        header("Location: dashboard.php");
+        exit();
+
     // Verificar primero si está bloqueado
-    if (
+    } elseif (
         isset($_SESSION["bloqueado_hasta"]) &&
         time() < $_SESSION["bloqueado_hasta"]
     ) {
@@ -75,6 +91,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION["id_usuario"] = $usuario["id_usuario"];
             $_SESSION["nombre"] = $usuario["nombre"];
             $_SESSION["id_rol"] = $usuario["id_rol"];
+            unset($_SESSION["es_invitado"]);
 
             // Renovar ID de sesión después del login
             session_regenerate_id(true);
@@ -283,6 +300,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </button>
 
         </form>
+
+        <div class="separador-acceso">
+            <span>o</span>
+        </div>
+
+        <form method="POST" action="" class="form-invitado">
+            <button
+                type="submit"
+                name="acceso_invitado"
+                value="1"
+                class="btn-invitado"
+            >
+                <span class="icono-invitado" aria-hidden="true">◌</span>
+                Acceder como invitado
+            </button>
+        </form>
+
+        <p class="texto-invitado">
+            Acceso temporal para consultar el monitoreo ambiental.
+        </p>
 
 
         <!-- INFORMACIÓN DEL SISTEMA -->
