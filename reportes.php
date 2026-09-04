@@ -3,8 +3,8 @@ session_start();
 require_once "conexion.php";
 
 // Verificar que exista una sesión activa
-if (!isset($_SESSION["id_usuario"])) {
-    header("Location: login.php");
+if (!isset($_SESSION["id_usuario"]) || !empty($_SESSION["es_invitado"])) {
+    header("Location: dashboard.php");
     exit();
 }
 

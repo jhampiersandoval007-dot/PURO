@@ -246,7 +246,9 @@ if ($resultadoHumedad && $resultadoHumedad->num_rows > 0) {
     <a href="sensores.php">Sensores</a>
     <a href="mediciones.php">Mediciones</a>
     <a href="alertas.php">Alertas</a>
-    <a href="reportes.php">Reportes</a>
+    <?php if (empty($_SESSION["es_invitado"])): ?>
+        <a href="reportes.php">Reportes</a>
+    <?php endif; ?>
 
     <a href="logout.php" class="cerrar-sesion">
         Cerrar sesión

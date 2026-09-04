@@ -532,15 +532,22 @@ form {
 
 .btn-invitado {
     width: 100%;
-    min-height: 48px;
+    min-height: 52px;
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 9px;
-    border: 1px solid rgba(165, 214, 167, 0.26);
+    overflow: visible;
+    isolation: isolate;
+    border: 1px solid rgba(165, 214, 167, 0.36);
     border-radius: 12px;
-    background: rgba(255, 255, 255, 0.035);
-    color: #c8d6cb;
+    background: linear-gradient(
+        135deg,
+        rgba(36, 96, 52, 0.78),
+        rgba(44, 122, 65, 0.64)
+    );
+    color: #e8f5e9;
     cursor: pointer;
     font-family: inherit;
     font-size: 14px;
@@ -551,20 +558,70 @@ form {
 
 .btn-invitado:hover {
     transform: translateY(-2px);
-    border-color: rgba(102, 187, 106, 0.6);
-    background: rgba(76, 175, 80, 0.12);
-    color: #e8f5e9;
-    box-shadow: 0 10px 24px rgba(46, 125, 50, 0.16);
+    border-color: rgba(165, 214, 167, 0.72);
+    background: linear-gradient(
+        135deg,
+        rgba(48, 129, 69, 0.92),
+        rgba(69, 156, 81, 0.78)
+    );
+    box-shadow: 0 13px 29px rgba(46, 125, 50, 0.3);
 }
 
 .btn-invitado:active {
     transform: translateY(1px);
 }
 
-.icono-invitado {
-    color: #66bb6a;
-    font-size: 22px;
-    line-height: 1;
+.btn-invitado span {
+    position: relative;
+    z-index: 2;
+    transition: letter-spacing 0.3s ease;
+}
+
+.btn-invitado:hover span {
+    letter-spacing: 0.5px;
+}
+
+.invitado-hoja {
+    position: absolute;
+    width: 34px;
+    height: 34px;
+    opacity: 0;
+    z-index: -1;
+    fill: #a5d6a7;
+    pointer-events: none;
+    transition: opacity 0.3s ease,
+        transform 0.55s cubic-bezier(0.17, 0.67, 0.35, 1.25);
+}
+
+.invitado-hoja-1 {
+    left: 16%;
+    transform: translate(0, 0) rotate(-25deg) scale(0.3);
+}
+
+.invitado-hoja-2 {
+    right: 16%;
+    transform: translate(0, 0) rotate(25deg) scale(0.3);
+}
+
+.invitado-hoja-3 {
+    left: 50%;
+    transform: translate(-50%, 0) scale(0.3);
+}
+
+.btn-invitado:hover .invitado-hoja {
+    opacity: 1;
+}
+
+.btn-invitado:hover .invitado-hoja-1 {
+    transform: translate(-62px, -33px) rotate(-48deg) scale(1.2);
+}
+
+.btn-invitado:hover .invitado-hoja-2 {
+    transform: translate(62px, -33px) rotate(48deg) scale(1.2);
+}
+
+.btn-invitado:hover .invitado-hoja-3 {
+    transform: translate(-50%, 45px) rotate(12deg) scale(1.12);
 }
 
 .texto-invitado {
@@ -583,8 +640,8 @@ form {
 .btn-ingresar svg {
     position: absolute;
 
-    width: 28px;
-    height: 28px;
+    width: 34px;
+    height: 34px;
 
     pointer-events: none;
 
@@ -667,9 +724,9 @@ form {
     opacity: 1;
 
     transform:
-        translate(-34px, -38px)
+        translate(-44px, -46px)
         rotate(-35deg)
-        scale(1);
+        scale(1.15);
 }
 
 
@@ -677,9 +734,9 @@ form {
     opacity: 1;
 
     transform:
-        translate(34px, -38px)
+        translate(44px, -46px)
         rotate(35deg)
-        scale(1);
+        scale(1.15);
 }
 
 
@@ -687,9 +744,9 @@ form {
     opacity: 1;
 
     transform:
-        translate(-45px, 22px)
+        translate(-56px, 28px)
         rotate(-55deg)
-        scale(0.9);
+        scale(1.05);
 }
 
 
@@ -697,9 +754,9 @@ form {
     opacity: 1;
 
     transform:
-        translate(45px, 22px)
+        translate(56px, 28px)
         rotate(55deg)
-        scale(0.9);
+        scale(1.05);
 }
 
 
@@ -707,9 +764,9 @@ form {
     opacity: 1;
 
     transform:
-        translate(-50%, -52px)
+        translate(-50%, -62px)
         rotate(15deg)
-        scale(1.05);
+        scale(1.2);
 }
 
 

@@ -189,7 +189,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="form-grupo">
 
                 <label for="correo">
-                    Correo electrónico
+                    Usuario (correo electrónico)
                 </label>
 
                 <input
@@ -230,7 +230,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             >
 
                 <span>
-                    Ingresar al sistema
+                    Ingresar como administrador
                 </span>
 
                 <!-- HOJA 1 -->
@@ -310,15 +310,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 type="submit"
                 name="acceso_invitado"
                 value="1"
-                class="btn-invitado"
+                class="btn-ingresar"
             >
-                <span class="icono-invitado" aria-hidden="true">◌</span>
-                Acceder como invitado
+                <span>Ingresar como invitado</span>
             </button>
         </form>
 
         <p class="texto-invitado">
-            Acceso temporal para consultar el monitoreo ambiental.
+            Acceso directo para consultar el monitoreo ambiental.
         </p>
 
 
