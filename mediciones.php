@@ -138,5 +138,12 @@ function titulo_sensor($tipo_sensor)
         <section class="sin-mediciones"><strong>Aún no hay mediciones para mostrar.</strong>No existen registros asociados al prototipo PURO Centro.</section>
     <?php endif; ?>
 </main>
+<script>
+    if ("scrollRestoration" in history) {
+        history.scrollRestoration = "manual";
+    }
+
+    window.scrollTo(0, 0);
+</script>
 </body>
 </html>
