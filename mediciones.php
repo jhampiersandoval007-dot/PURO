@@ -62,6 +62,13 @@ function titulo_sensor($tipo_sensor)
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mediciones - PURO</title>
+    <script>
+        if ("scrollRestoration" in history) {
+            history.scrollRestoration = "manual";
+        }
+
+        window.scrollTo(0, 0);
+    </script>
     <link rel="stylesheet" href="panel.css">
     <style>
         .resumen-mediciones { display:flex; align-items:center; gap:12px; margin-top:18px; color:#a5b8aa; font-size:14px; }
@@ -94,7 +101,11 @@ function titulo_sensor($tipo_sensor)
     <?php if (empty($_SESSION["es_invitado"])): ?>
         <a href="reportes.php">Reportes</a>
     <?php endif; ?>
-    <a href="logout.php" class="cerrar-sesion">Cerrar sesión</a>
+    <a href="logout.php" class="cerrar-sesion">
+        <svg class="arr-1" viewBox="0 0 24 24" aria-hidden="true"><path d="M13 5l7 7-7 7v-4H4v-2h9V5z"/></svg>
+        <svg class="arr-2" viewBox="0 0 24 24" aria-hidden="true"><path d="M13 5l7 7-7 7v-4H4v-2h9V5z"/></svg>
+        <span class="circle"></span><span class="text">Cerrar sesión</span>
+    </a>
 </div>
 <main class="contenido">
     <div class="encabezado">
@@ -139,11 +150,14 @@ function titulo_sensor($tipo_sensor)
     <?php endif; ?>
 </main>
 <script>
-    if ("scrollRestoration" in history) {
-        history.scrollRestoration = "manual";
+    function abrirMedicionesArriba() {
+        window.scrollTo(0, 0);
     }
 
-    window.scrollTo(0, 0);
+    window.addEventListener("load", abrirMedicionesArriba);
+    window.addEventListener("pageshow", abrirMedicionesArriba);
+
+    setTimeout(abrirMedicionesArriba, 50);
 </script>
 </body>
 </html>
