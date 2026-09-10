@@ -74,16 +74,70 @@ body {
 }
 
 .sidebar .cerrar-sesion {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
     margin-top: 34px;
-    color: #ffd1d1;
-    background: rgba(198, 40, 40, 0.12);
-    border-color: rgba(239, 83, 80, 0.2);
+    padding-right: 42px;
+    color: #ffd6cf;
+    background: rgba(108, 40, 28, 0.24);
+    border-color: rgba(255, 138, 128, 0.3);
+    box-shadow: 0 0 0 1px rgba(255, 138, 128, 0.08);
+    transition: color 0.45s cubic-bezier(0.23, 1, 0.32, 1),
+        border-radius 0.45s cubic-bezier(0.23, 1, 0.32, 1),
+        box-shadow 0.45s cubic-bezier(0.23, 1, 0.32, 1),
+        transform 0.45s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.sidebar .cerrar-sesion::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: -1;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #ff8a80;
+    opacity: 0;
+    transform: translate(-50%, -50%);
+    transition: width 0.7s cubic-bezier(0.23, 1, 0.32, 1),
+        height 0.7s cubic-bezier(0.23, 1, 0.32, 1),
+        opacity 0.5s ease;
+}
+
+.sidebar .cerrar-sesion::after {
+    content: "→";
+    position: absolute;
+    right: 15px;
+    color: #ffb4ac;
+    font-size: 20px;
+    font-weight: 700;
+    transition: right 0.55s cubic-bezier(0.23, 1, 0.32, 1),
+        color 0.45s ease;
 }
 
 .sidebar .cerrar-sesion:hover {
-    color: #ffffff;
-    background: rgba(198, 40, 40, 0.42);
-    border-color: rgba(255, 138, 128, 0.4);
+    color: #1b100d;
+    border-radius: 18px;
+    border-color: transparent;
+    box-shadow: 0 0 0 8px transparent;
+    transform: translateX(3px);
+}
+
+.sidebar .cerrar-sesion:hover::before {
+    width: 300px;
+    height: 300px;
+    opacity: 1;
+}
+
+.sidebar .cerrar-sesion:hover::after {
+    right: -28px;
+    color: #1b100d;
+}
+
+.sidebar .cerrar-sesion:active {
+    transform: translateX(3px) scale(0.96);
 }
 
 .contenido {
