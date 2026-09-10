@@ -181,7 +181,9 @@ $resultado = $conexion->query($sql);
     <?php endif; ?>
 
     <a href="logout.php" class="cerrar-sesion">
-        Cerrar sesión
+        <svg class="arr-1" viewBox="0 0 24 24" aria-hidden="true"><path d="M13 5l7 7-7 7v-4H4v-2h9V5z"/></svg>
+        <svg class="arr-2" viewBox="0 0 24 24" aria-hidden="true"><path d="M13 5l7 7-7 7v-4H4v-2h9V5z"/></svg>
+        <span class="circle"></span><span class="text">Cerrar sesión</span>
     </a>
 
 </div>
