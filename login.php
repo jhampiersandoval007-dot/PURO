@@ -313,6 +313,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 class="btn-ingresar"
             >
                 <span>Ingresar como invitado</span>
+
+                <svg class="icon-1" viewBox="0 0 24 24" aria-hidden="true">
+                    <path class="fil-leaf-1" d="M12 21C8 17 5 13 6 8c4 1 7 4 6 8-1 2-2 4 0 5z" />
+                </svg>
+
+                <svg class="icon-2" viewBox="0 0 24 24" aria-hidden="true">
+                    <path class="fil-leaf-2" d="M12 21C16 17 19 13 18 8c-4 1-7 4-6 8 1 2 2 4 0 5z" />
+                </svg>
+
+                <svg class="icon-3" viewBox="0 0 24 24" aria-hidden="true">
+                    <path class="fil-leaf-3" d="M12 20C9 16 8 12 10 8c3 2 5 5 3 9z" />
+                </svg>
+
+                <svg class="icon-4" viewBox="0 0 24 24" aria-hidden="true">
+                    <path class="fil-leaf-4" d="M12 20C15 16 16 12 14 8c-3 2-5 5-3 9z" />
+                </svg>
+
+                <svg class="icon-5" viewBox="0 0 24 24" aria-hidden="true">
+                    <path class="fil-leaf-5" d="M12 18c-2-4-2-7 0-10 2 3 2 6 0 10z" />
+                </svg>
             </button>
         </form>
 
