@@ -69,7 +69,7 @@ function titulo_sensor($tipo_sensor)
 
         window.scrollTo(0, 0);
     </script>
-    <link rel="stylesheet" href="panel.css">
+    <link rel="stylesheet" href="panel.css?v=20261008-glass">
     <style>
         .resumen-mediciones { display:flex; align-items:center; gap:12px; margin-top:18px; color:#a5b8aa; font-size:14px; }
         .indicador-activo { width:10px; height:10px; border-radius:50%; background:#66bb6a; box-shadow:0 0 14px rgba(102,187,106,.8); animation:pulsoMedicion 2s ease-in-out infinite; }

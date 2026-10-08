@@ -224,7 +224,7 @@ if ($resultadoHumedad && $resultadoHumedad->num_rows > 0) {
             }
         }
     </style>
-    <link rel="stylesheet" href="panel.css">
+    <link rel="stylesheet" href="panel.css?v=20261008-glass">
 
 </head>
 
