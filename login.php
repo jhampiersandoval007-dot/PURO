@@ -6,7 +6,7 @@ $mensaje = "";
 
 // Configuración contra fuerza bruta
 $max_intentos = 5;
-$tiempo_bloqueo = 60; // 60 segundos
+$tiempo_bloqueo = 60;
 
 // Crear contador si todavía no existe
 if (!isset($_SESSION["intentos_login"])) {
@@ -27,7 +27,7 @@ if (isset($_SESSION["bloqueado_hasta"])) {
 // Procesar formulario
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    // Acceso de consulta sin crear un usuario en la base de datos
+    // Acceso como invitado
     if (isset($_POST["acceso_invitado"])) {
 
         $_SESSION["intentos_login"] = 0;
@@ -43,7 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         header("Location: dashboard.php");
         exit();
 
-    // Verificar primero si está bloqueado
+    // Verificar si está bloqueado
     } elseif (
         isset($_SESSION["bloqueado_hasta"]) &&
         time() < $_SESSION["bloqueado_hasta"]
@@ -59,10 +59,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $correo = $_POST["correo"];
         $password = $_POST["password"];
 
-        // Consulta preparada contra SQL Injection
-        $sql = "SELECT id_usuario, nombre, correo, password, id_rol
+        // Consulta usando la columna correcta: email
+        $sql = "SELECT id_usuario, nombre, apellido, email, password, id_rol
                 FROM usuarios
-                WHERE correo = ?";
+                WHERE email = ?";
 
         $stmt = $conexion->prepare($sql);
         $stmt->bind_param("s", $correo);
@@ -84,16 +84,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // LOGIN CORRECTO
         if ($login_correcto) {
 
-            // Reiniciar intentos fallidos
             $_SESSION["intentos_login"] = 0;
             unset($_SESSION["bloqueado_hasta"]);
 
             $_SESSION["id_usuario"] = $usuario["id_usuario"];
             $_SESSION["nombre"] = $usuario["nombre"];
             $_SESSION["id_rol"] = $usuario["id_rol"];
+
             unset($_SESSION["es_invitado"]);
 
-            // Renovar ID de sesión después del login
             session_regenerate_id(true);
 
             header("Location: dashboard.php");
@@ -139,7 +138,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <title>PURO - Iniciar Sesión</title>
 
-    <!-- Estilos del Login -->
     <link rel="stylesheet" href="login.css">
 
 </head>
@@ -165,14 +163,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         </div>
 
-
         <!-- TÍTULO -->
         <h3>
             Acceso al sistema
         </h3>
 
-
-        <!-- MENSAJES DE ERROR / BLOQUEO -->
+        <!-- MENSAJE -->
         <?php if ($mensaje != ""): ?>
 
             <div class="mensaje">
@@ -181,11 +177,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         <?php endif; ?>
 
-
-        <!-- FORMULARIO -->
+        <!-- FORMULARIO ADMINISTRADOR -->
         <form method="POST" action="">
 
-            <!-- CORREO -->
             <div class="form-grupo">
 
                 <label for="correo">
@@ -203,8 +197,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             </div>
 
-
-            <!-- CONTRASEÑA -->
             <div class="form-grupo">
 
                 <label for="password">
@@ -222,8 +214,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             </div>
 
-
-            <!-- BOTÓN ÚNICO -->
             <button
                 type="submit"
                 class="btn-ingresar"
@@ -233,68 +223,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     Ingresar como administrador
                 </span>
 
-                <!-- HOJA 1 -->
-                <svg
-                    class="icon-1"
-                    viewBox="0 0 24 24"
-                    aria-hidden="true"
-                >
-                    <path
-                        class="fil-leaf-1"
-                        d="M12 21C8 17 5 13 6 8c4 1 7 4 6 8-1 2-2 4 0 5z"
-                    />
+                <svg class="icon-1" viewBox="0 0 24 24" aria-hidden="true">
+                    <path class="fil-leaf-1"
+                        d="M12 21C8 17 5 13 6 8c4 1 7 4 6 8-1 2-2 4 0 5z"/>
                 </svg>
 
-
-                <!-- HOJA 2 -->
-                <svg
-                    class="icon-2"
-                    viewBox="0 0 24 24"
-                    aria-hidden="true"
-                >
-                    <path
-                        class="fil-leaf-2"
-                        d="M12 21C16 17 19 13 18 8c-4 1-7 4-6 8 1 2 2 4 0 5z"
-                    />
+                <svg class="icon-2" viewBox="0 0 24 24" aria-hidden="true">
+                    <path class="fil-leaf-2"
+                        d="M12 21C16 17 19 13 18 8c-4 1-7 4-6 8 1 2 2 4 0 5z"/>
                 </svg>
 
-
-                <!-- HOJA 3 -->
-                <svg
-                    class="icon-3"
-                    viewBox="0 0 24 24"
-                    aria-hidden="true"
-                >
-                    <path
-                        class="fil-leaf-3"
-                        d="M12 20C9 16 8 12 10 8c3 2 5 5 3 9z"
-                    />
+                <svg class="icon-3" viewBox="0 0 24 24" aria-hidden="true">
+                    <path class="fil-leaf-3"
+                        d="M12 20C9 16 8 12 10 8c3 2 5 5 3 9z"/>
                 </svg>
 
-
-                <!-- HOJA 4 -->
-                <svg
-                    class="icon-4"
-                    viewBox="0 0 24 24"
-                    aria-hidden="true"
-                >
-                    <path
-                        class="fil-leaf-4"
-                        d="M12 20C15 16 16 12 14 8c-3 2-5 5-3 9z"
-                    />
+                <svg class="icon-4" viewBox="0 0 24 24" aria-hidden="true">
+                    <path class="fil-leaf-4"
+                        d="M12 20C15 16 16 12 14 8c-3 2-5 5-3 9z"/>
                 </svg>
 
-
-                <!-- HOJA 5 -->
-                <svg
-                    class="icon-5"
-                    viewBox="0 0 24 24"
-                    aria-hidden="true"
-                >
-                    <path
-                        class="fil-leaf-5"
-                        d="M12 18c-2-4-2-7 0-10 2 3 2 6 0 10z"
-                    />
+                <svg class="icon-5" viewBox="0 0 24 24" aria-hidden="true">
+                    <path class="fil-leaf-5"
+                        d="M12 18c-2-4-2-7 0-10 2 3 2 6 0 10z"/>
                 </svg>
 
             </button>
@@ -305,41 +256,52 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <span>o</span>
         </div>
 
+        <!-- FORMULARIO INVITADO -->
         <form method="POST" action="" class="form-invitado">
+
             <button
                 type="submit"
                 name="acceso_invitado"
                 value="1"
                 class="btn-ingresar"
             >
-                <span>Ingresar como invitado</span>
+
+                <span>
+                    Ingresar como invitado
+                </span>
 
                 <svg class="icon-1" viewBox="0 0 24 24" aria-hidden="true">
-                    <path class="fil-leaf-1" d="M12 21C8 17 5 13 6 8c4 1 7 4 6 8-1 2-2 4 0 5z" />
+                    <path class="fil-leaf-1"
+                        d="M12 21C8 17 5 13 6 8c4 1 7 4 6 8-1 2-2 4 0 5z"/>
                 </svg>
 
                 <svg class="icon-2" viewBox="0 0 24 24" aria-hidden="true">
-                    <path class="fil-leaf-2" d="M12 21C16 17 19 13 18 8c-4 1-7 4-6 8 1 2 2 4 0 5z" />
+                    <path class="fil-leaf-2"
+                        d="M12 21C16 17 19 13 18 8c-4 1-7 4-6 8 1 2 2 4 0 5z"/>
                 </svg>
 
                 <svg class="icon-3" viewBox="0 0 24 24" aria-hidden="true">
-                    <path class="fil-leaf-3" d="M12 20C9 16 8 12 10 8c3 2 5 5 3 9z" />
+                    <path class="fil-leaf-3"
+                        d="M12 20C9 16 8 12 10 8c3 2 5 5 3 9z"/>
                 </svg>
 
                 <svg class="icon-4" viewBox="0 0 24 24" aria-hidden="true">
-                    <path class="fil-leaf-4" d="M12 20C15 16 16 12 14 8c-3 2-5 5-3 9z" />
+                    <path class="fil-leaf-4"
+                        d="M12 20C15 16 16 12 14 8c-3 2-5 5-3 9z"/>
                 </svg>
 
                 <svg class="icon-5" viewBox="0 0 24 24" aria-hidden="true">
-                    <path class="fil-leaf-5" d="M12 18c-2-4-2-7 0-10 2 3 2 6 0 10z" />
+                    <path class="fil-leaf-5"
+                        d="M12 18c-2-4-2-7 0-10 2 3 2 6 0 10z"/>
                 </svg>
+
             </button>
+
         </form>
 
         <p class="texto-invitado">
             Acceso directo para consultar el monitoreo ambiental.
         </p>
-
 
         <!-- INFORMACIÓN DEL SISTEMA -->
         <div class="sistema-info">
@@ -357,7 +319,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
 
         </div>
-
 
         <!-- PIE -->
         <div class="footer-login">
