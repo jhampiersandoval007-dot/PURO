@@ -14,12 +14,10 @@ $sql = "SELECT
             b.nombre,
             b.ubicacion,
             b.estado,
-            b.fecha_instalacion,
+            NULL AS fecha_instalacion,
             b.descripcion,
-            u.nombre AS responsable
+            '-' AS responsable
         FROM biofiltros b
-        INNER JOIN usuarios u
-            ON b.id_usuario = u.id_usuario
         ORDER BY b.id_biofiltro ASC";
 
 $resultado = $conexion->query($sql);

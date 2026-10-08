@@ -12,7 +12,7 @@ $sql = "SELECT
             ts.nombre AS tipo_sensor,
             s.modelo,
             s.estado,
-            s.fecha_instalacion,
+            NULL AS fecha_instalacion,
             b.nombre AS biofiltro
         FROM sensores s
         INNER JOIN tipos_sensores ts

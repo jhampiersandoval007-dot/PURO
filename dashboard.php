@@ -55,7 +55,7 @@ if ($resultadoCalidadAire && $resultadoCalidadAire->num_rows > 0) {
    ÚLTIMA TEMPERATURA
    ========================= */
 
-$sqlTemperatura = "SELECT m.co2 AS valor
+$sqlTemperatura = "SELECT m.temperatura AS valor
                    FROM mediciones m
                    INNER JOIN sensores s
                        ON m.id_sensor = s.id_sensor
@@ -79,7 +79,7 @@ if ($resultadoTemperatura && $resultadoTemperatura->num_rows > 0) {
    ÚLTIMA MEDICIÓN DE HUMEDAD
    ========================= */
 
-$sqlHumedad = "SELECT m.co2 AS valor
+$sqlHumedad = "SELECT m.humedad AS valor
                FROM mediciones m
                INNER JOIN sensores s
                    ON m.id_sensor = s.id_sensor
