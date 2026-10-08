@@ -224,7 +224,7 @@ if ($resultadoHumedad && $resultadoHumedad->num_rows > 0) {
             }
         }
     </style>
-    <link rel="stylesheet" href="panel.css?v=20261008-glass">
+    <link rel="stylesheet" href="panel.css?v=20261008-historia">
 
 </head>
 
@@ -311,6 +311,44 @@ if ($resultadoHumedad && $resultadoHumedad->num_rows > 0) {
         </div>
 
     </div>
+
+
+    <section class="historia-puro" aria-labelledby="historia-titulo">
+        <div class="historia-intro">
+            <span class="etiqueta-panel">La historia detrás del monitoreo</span>
+            <h2 id="historia-titulo">Una idea que quiere echar raíces en la ciudad</h2>
+            <p>PURO une biofiltración urbana con microalgas y monitoreo ambiental. Es un prototipo en desarrollo para acercar la tecnología ambiental a las conversaciones sobre la ciudad que compartimos.</p>
+        </div>
+
+        <div class="historia-recorrido" aria-label="Etapas del proyecto PURO">
+            <article class="historia-etapa">
+                <span class="historia-numero" aria-hidden="true">01</span>
+                <div>
+                    <h3>Una pregunta urbana</h3>
+                    <p>¿Cómo podemos explorar soluciones ambientales desde nuestro propio entorno? PURO nace como una propuesta académica que conecta naturaleza y tecnología.</p>
+                </div>
+            </article>
+            <article class="historia-etapa">
+                <span class="historia-numero" aria-hidden="true">02</span>
+                <div>
+                    <h3>De la idea al prototipo</h3>
+                    <p>El sistema combina un biofiltro con microalgas y sensores para observar variables como CO₂, temperatura y humedad. La integración y calibración continúan en desarrollo.</p>
+                </div>
+            </article>
+            <article class="historia-etapa">
+                <span class="historia-numero" aria-hidden="true">03</span>
+                <div>
+                    <h3>Datos para conversar</h3>
+                    <p>Hacer visibles las mediciones ayuda a entender mejor el entorno y abre la puerta a evaluar futuras mejoras con la comunidad.</p>
+                </div>
+            </article>
+        </div>
+
+        <details class="historia-nota">
+            <summary>¿Qué significa que PURO esté en desarrollo?</summary>
+            <p>El prototipo todavía requiere integrar y calibrar sus componentes. Por eso, las lecturas sirven para explorar el sistema; aún no representan una medición certificada de impacto ambiental ni una promesa de reducción de CO₂.</p>
+        </details>
+    </section>
 
 
     <div class="estado">

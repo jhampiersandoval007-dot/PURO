@@ -143,7 +143,7 @@ $resultado = $conexion->query($sql);
             padding: 30px;
         }
     </style>
-    <link rel="stylesheet" href="panel.css?v=20261008-glass">
+    <link rel="stylesheet" href="panel.css?v=20261008-historia">
 </head>
 
 <body>
