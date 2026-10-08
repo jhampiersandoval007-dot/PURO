@@ -1,6 +1,5 @@
 <?php
 session_start();
-
 require_once "rate_limit.php";
 require_once "conexion.php";
 
@@ -9,13 +8,8 @@ if (!isset($_SESSION["id_usuario"])) {
     exit();
 }
 
-$nombre = $_SESSION["nombre"];
-
-/* =========================
-   ÚLTIMA MEDICIÓN DE CO2
-   ========================= */
-
-$sqlCO2 = "SELECT m.valor, m.unidad
+$nombre = $_SESSION["nombre"] ?? "Usuario";
+$sqlCO2 = "SELECT m.co2
            FROM mediciones m
            INNER JOIN sensores s
                ON m.id_sensor = s.id_sensor
@@ -30,14 +24,14 @@ $co2 = "Sin datos";
 
 if ($resultadoCO2 && $resultadoCO2->num_rows > 0) {
     $datoCO2 = $resultadoCO2->fetch_assoc();
-    $co2 = $datoCO2["valor"] . " " . $datoCO2["unidad"];
+    $co2 = $datoCO2["co2"];
 }
 
 /* =========================
    ÚLTIMA MEDICIÓN DE CALIDAD DEL AIRE
    ========================= */
 
-$sqlCalidadAire = "SELECT m.valor, m.unidad
+$sqlCalidadAire = "SELECT m.co2 AS valor
            FROM mediciones m
            INNER JOIN sensores s
                ON m.id_sensor = s.id_sensor
@@ -53,7 +47,7 @@ $calidadAire = "Sin datos";
 
 if ($resultadoCalidadAire && $resultadoCalidadAire->num_rows > 0) {
     $datoCalidadAire = $resultadoCalidadAire->fetch_assoc();
-    $calidadAire = $datoCalidadAire["valor"] . " " . $datoCalidadAire["unidad"];
+    $calidadAire = $datoCalidadAire["valor"] . " ADC";
 }
 
 
@@ -61,7 +55,7 @@ if ($resultadoCalidadAire && $resultadoCalidadAire->num_rows > 0) {
    ÚLTIMA TEMPERATURA
    ========================= */
 
-$sqlTemperatura = "SELECT m.valor, m.unidad
+$sqlTemperatura = "SELECT m.co2 AS valor
                    FROM mediciones m
                    INNER JOIN sensores s
                        ON m.id_sensor = s.id_sensor
@@ -77,7 +71,7 @@ $temperatura = "Sin datos";
 
 if ($resultadoTemperatura && $resultadoTemperatura->num_rows > 0) {
     $datoTemperatura = $resultadoTemperatura->fetch_assoc();
-    $temperatura = $datoTemperatura["valor"] . " " . $datoTemperatura["unidad"];
+    $temperatura = $datoTemperatura["valor"] . " °C";
 }
 
 
@@ -85,7 +79,7 @@ if ($resultadoTemperatura && $resultadoTemperatura->num_rows > 0) {
    ÚLTIMA MEDICIÓN DE HUMEDAD
    ========================= */
 
-$sqlHumedad = "SELECT m.valor, m.unidad
+$sqlHumedad = "SELECT m.co2 AS valor
                FROM mediciones m
                INNER JOIN sensores s
                    ON m.id_sensor = s.id_sensor
@@ -101,7 +95,7 @@ $humedad = "Sin datos";
 
 if ($resultadoHumedad && $resultadoHumedad->num_rows > 0) {
     $datoHumedad = $resultadoHumedad->fetch_assoc();
-    $humedad = $datoHumedad["valor"] . " " . $datoHumedad["unidad"];
+    $humedad = $datoHumedad["valor"] . " %";
 }
 ?>
 
