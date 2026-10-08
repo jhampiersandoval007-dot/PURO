@@ -224,7 +224,7 @@ if ($resultadoHumedad && $resultadoHumedad->num_rows > 0) {
             }
         }
     </style>
-    <link rel="stylesheet" href="panel.css?v=20261008-historia">
+    <link rel="stylesheet" href="panel.css?v=20261008-historia-social">
 
 </head>
 
@@ -316,8 +316,8 @@ if ($resultadoHumedad && $resultadoHumedad->num_rows > 0) {
     <section class="historia-puro" aria-labelledby="historia-titulo">
         <div class="historia-intro">
             <span class="etiqueta-panel">La historia detrás del monitoreo</span>
-            <h2 id="historia-titulo">Una idea que quiere echar raíces en la ciudad</h2>
-            <p>PURO une biofiltración urbana con microalgas y monitoreo ambiental. Es un prototipo en desarrollo para acercar la tecnología ambiental a las conversaciones sobre la ciudad que compartimos.</p>
+            <h2 id="historia-titulo">Una ciudad más consciente empieza por observar</h2>
+            <p>PURO es un proyecto académico que explora cómo unir microalgas, biofiltración y tecnología para acercar el monitoreo ambiental a la vida urbana. Cada lectura es una oportunidad para aprender más sobre el lugar donde vivimos.</p>
         </div>
 
         <div class="historia-recorrido" aria-label="Etapas del proyecto PURO">
@@ -325,28 +325,46 @@ if ($resultadoHumedad && $resultadoHumedad->num_rows > 0) {
                 <span class="historia-numero" aria-hidden="true">01</span>
                 <div>
                     <h3>Una pregunta urbana</h3>
-                    <p>¿Cómo podemos explorar soluciones ambientales desde nuestro propio entorno? PURO nace como una propuesta académica que conecta naturaleza y tecnología.</p>
+                    <p>¿Cómo podemos explorar soluciones ambientales desde nuestro propio entorno? PURO nace como una propuesta académica que conecta naturaleza, ciencia y tecnología.</p>
                 </div>
             </article>
             <article class="historia-etapa">
                 <span class="historia-numero" aria-hidden="true">02</span>
                 <div>
                     <h3>De la idea al prototipo</h3>
-                    <p>El sistema combina un biofiltro con microalgas y sensores para observar variables como CO₂, temperatura y humedad. La integración y calibración continúan en desarrollo.</p>
+                    <p>El prototipo combina un biofiltro con microalgas y sensores: DHT22 para temperatura y humedad, MQ-135 para calidad general del aire y MG811 para explorar lecturas de CO₂. Un ESP32 conectará el equipo con esta plataforma; la integración y calibración siguen en desarrollo.</p>
                 </div>
             </article>
             <article class="historia-etapa">
                 <span class="historia-numero" aria-hidden="true">03</span>
                 <div>
-                    <h3>Datos para conversar</h3>
-                    <p>Hacer visibles las mediciones ayuda a entender mejor el entorno y abre la puerta a evaluar futuras mejoras con la comunidad.</p>
+                    <h3>Conocimiento para compartir</h3>
+                    <p>Hacer visibles las mediciones invita a estudiantes y comunidad a conversar sobre su entorno y a evaluar futuras ideas con información local.</p>
                 </div>
             </article>
         </div>
 
+        <div class="historia-aprendizajes">
+            <article class="historia-aprendizaje">
+                <span class="historia-etiqueta">En evaluación</span>
+                <h3>¿Cuánto puede durar?</h3>
+                <p>No hay una vida útil única para todos los biofiltros. Depende del equipo y su mantenimiento; el cultivo de microalgas también necesita luz y condiciones adecuadas para crecer. PURO aún no ha completado pruebas de duración.</p>
+            </article>
+            <article class="historia-aprendizaje">
+                <span class="historia-etiqueta">Falta medir</span>
+                <h3>¿A cuántos árboles equivale?</h3>
+                <p>Todavía no podemos dar una equivalencia real. Primero debemos medir cuánto CO₂ captura el prototipo durante un periodo definido. La captura de un árbol también cambia según su especie, edad y entorno.</p>
+            </article>
+            <article class="historia-aprendizaje">
+                <span class="historia-etiqueta">Aporte social</span>
+                <h3>¿Cómo puede ayudar?</h3>
+                <p>PURO busca acercar el monitoreo ambiental a la comunidad, apoyar el aprendizaje y generar información local. Su efecto en la calidad del aire y la salud todavía debe comprobarse.</p>
+            </article>
+        </div>
+
         <details class="historia-nota">
-            <summary>¿Qué significa que PURO esté en desarrollo?</summary>
-            <p>El prototipo todavía requiere integrar y calibrar sus componentes. Por eso, las lecturas sirven para explorar el sistema; aún no representan una medición certificada de impacto ambiental ni una promesa de reducción de CO₂.</p>
+            <summary>¿Por qué contamos la historia con datos pendientes?</summary>
+            <p>Queremos que PURO sea útil y también transparente. Antes de hablar de años de vida, árboles equivalentes o beneficios para la salud, necesitamos completar la integración, calibrar los sensores y medir el funcionamiento del prototipo.</p>
         </details>
     </section>
 
