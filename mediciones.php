@@ -7,27 +7,19 @@ if (!isset($_SESSION["id_usuario"])) {
     exit();
 }
 
-/* El sistema cuenta con un único prototipo: PURO Centro. */
-$biofiltro_actual = "PURO";
-
 $sql = "SELECT
             ts.nombre AS tipo_sensor,
             DATE_FORMAT(m.fecha_hora, '%Y-%m') AS mes,
             AVG(CASE ts.nombre WHEN 'CO2' THEN m.co2 WHEN 'Temperatura' THEN m.temperatura WHEN 'Humedad' THEN m.humedad WHEN 'Calidad del aire' THEN m.co2 END) AS valor_promedio,
             CASE ts.nombre WHEN 'CO2' THEN 'ADC' WHEN 'Temperatura' THEN '°C' WHEN 'Humedad' THEN '%' WHEN 'Calidad del aire' THEN 'ADC' END AS unidad,
-            COUNT(m.id_medicion) AS total_mediciones
+            COUNT(m.id_mediciones) AS total_mediciones
         FROM mediciones m
         INNER JOIN sensores s ON m.id_sensor = s.id_sensor
         INNER JOIN tipos_sensores ts ON s.id_tipo_sensor = ts.id_tipo_sensor
-        INNER JOIN biofiltros b ON s.id_biofiltro = b.id_biofiltro
-        WHERE b.nombre = ?
         GROUP BY ts.nombre, DATE_FORMAT(m.fecha_hora, '%Y-%m')
         ORDER BY ts.nombre ASC, mes ASC";
 
-$stmt = $conexion->prepare($sql);
-$stmt->bind_param("s", $biofiltro_actual);
-$stmt->execute();
-$resultado = $stmt->get_result();
+$resultado = $conexion->query($sql);
 
 $graficos = [];
 $total_mediciones = 0;
@@ -36,8 +28,6 @@ while ($medicion = $resultado->fetch_assoc()) {
     $graficos[$medicion["tipo_sensor"]][] = $medicion;
     $total_mediciones += (int) $medicion["total_mediciones"];
 }
-
-$stmt->close();
 
 function nombre_mes($fecha)
 {
@@ -113,7 +103,7 @@ function titulo_sensor($tipo_sensor)
         <p>Promedios mensuales registrados por los sensores del sistema PURO.</p>
         <div class="resumen-mediciones">
             <span class="indicador-activo"></span>
-            <span>Prototipo activo: <strong><?php echo htmlspecialchars($biofiltro_actual); ?></strong> · <?php echo htmlspecialchars((string) $total_mediciones); ?> mediciones analizadas</span>
+            <span>PURO · <?php echo htmlspecialchars((string) $total_mediciones); ?> mediciones analizadas</span>
         </div>
     </div>
     <?php if (!empty($graficos)): ?>
@@ -146,7 +136,7 @@ function titulo_sensor($tipo_sensor)
             <?php endforeach; ?>
         </section>
     <?php else: ?>
-        <section class="sin-mediciones"><strong>Aún no hay mediciones para mostrar.</strong>No existen registros asociados al prototipo PURO Centro.</section>
+        <section class="sin-mediciones"><strong>Aún no hay mediciones para mostrar.</strong>Cuando se registren lecturas de los sensores, aquí verás sus promedios mensuales.</section>
     <?php endif; ?>
 </main>
 <script>

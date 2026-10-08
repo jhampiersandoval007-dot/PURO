@@ -19,7 +19,7 @@ $sql = "SELECT
             b.nombre AS biofiltro
         FROM alertas a
         INNER JOIN mediciones m
-            ON a.id_medicion = m.id_medicion
+            ON a.id_medicion = m.id_mediciones
         INNER JOIN sensores s
             ON m.id_sensor = s.id_sensor
         INNER JOIN tipos_sensores ts

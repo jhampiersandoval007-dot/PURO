@@ -50,7 +50,8 @@ Arquitectura prevista: `ESP32 + sensores → adquisición de datos → comunicac
 | `conexion.php` | Crea una conexión MySQLi a la base de datos `puro_db`. |
 | `rate_limit.php` | Límite por sesión de 20 solicitudes en 10 segundos; actualmente se incluye desde `dashboard.php`. |
 | `dashboard.php` | Panel que muestra la última medición de CO2, temperatura y humedad. |
-| `biofiltros.php`, `sensores.php`, `mediciones.php`, `alertas.php`, `reportes.php` | Páginas autenticadas de consulta y visualización de registros. |
+| `biofiltros.php`, `sensores.php`, `mediciones.php`, `alertas.php` | Páginas autenticadas de consulta y visualización de registros. |
+| `reportes.php` | Lista reportes guardados y permite generar un resumen de mediciones y alertas en la base de datos. |
 | `logout.php` | Cierra la sesión y redirige a `/PURO/login.php`. |
 
 Las páginas del panel usan una barra lateral con enlaces a las seis secciones y estilos CSS embebidos. No se han observado archivos JavaScript en la raíz.
@@ -84,7 +85,7 @@ Mantener consultas preparadas, validación de entradas, sesiones y escape de con
 
 El dashboard consulta la última fila de `mediciones` para tipos cuyo nombre sea exactamente `CO2`, `Temperatura` y `Humedad`, ordenando por `fecha_hora` descendente. Si no hay resultados, muestra `Sin datos`. También presenta un estado visual fijo para “PURO Norte”; no se ha verificado que ese texto provenga de la base de datos.
 
-Las secciones de consulta muestran los registros existentes; no se han observado formularios de creación, edición, eliminación, generación de reportes ni reglas automáticas de alertas en estos archivos.
+Las secciones de consulta muestran los registros existentes. `reportes.php` guarda un resumen del total de mediciones y alertas y la fecha de la última medición. No genera archivos PDF o Excel. No se han observado reglas automáticas para crear alertas.
 
 ## 11. Diseño visual
 
@@ -102,7 +103,7 @@ Antes de controlar una bomba desde el ESP32, verificar su función y requisitos 
 
 | Estado | Elementos |
 | --- | --- |
-| **Implementado en la raíz actual** | Login, cierre de sesión, consultas MySQLi y vistas para dashboard, biofiltros, sensores, mediciones, alertas y reportes. |
+| **Implementado en la raíz actual** | Login, cierre de sesión, consultas MySQLi y vistas para dashboard, biofiltros, sensores, mediciones, alertas y reportes; generación de resúmenes de monitoreo almacenados en la tabla `reportes`. |
 | **En desarrollo / pendiente de verificación** | Integración efectiva ESP32-Wi‑Fi-servidor, firmware, recepción de datos, calibración del MG811 y lectura real de los sensores. |
 | **Planificado** | Autenticación, gestión de biofiltros y sensores, registro y visualización de mediciones, alertas y reportes; algunas secciones ya visualizan datos, pero no se debe asumir que toda su gestión está implementada. |
 
