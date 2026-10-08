@@ -41,24 +41,24 @@ if ($co2_recibido && ($co2 === false || $co2 < 0 || $co2 > 4095)) {
 }
 
 $mediciones = [
-    "Calidad del aire" => [$calidad_aire, "ADC"],
-    "Temperatura" => [$temperatura, "°C"],
-    "Humedad" => [$humedad, "%"]
+    "Calidad del aire" => ["co2", $calidad_aire],
+    "Temperatura" => ["temperatura", $temperatura],
+    "Humedad" => ["humedad", $humedad]
 ];
 
 if ($co2_recibido) {
-    $mediciones["CO2"] = [$co2, "ADC"];
+    $mediciones["CO2"] = ["co2", $co2];
 }
 
 $sql_sensor = "SELECT s.id_sensor FROM sensores s INNER JOIN tipos_sensores ts ON s.id_tipo_sensor = ts.id_tipo_sensor WHERE ts.nombre = ? LIMIT 1";
-$sql_insertar = "INSERT INTO mediciones (id_sensor, valor, unidad, fecha_hora) VALUES (?, ?, ?, NOW())";
+
 
 try {
     $conexion->begin_transaction();
     $buscar_sensor = $conexion->prepare($sql_sensor);
-    $insertar_medicion = $conexion->prepare($sql_insertar);
 
-    foreach ($mediciones as $tipo_sensor => [$valor, $unidad]) {
+
+    foreach ($mediciones as $tipo_sensor => [$columna, $valor]) {
         $buscar_sensor->bind_param("s", $tipo_sensor);
         $buscar_sensor->execute();
         $sensor = $buscar_sensor->get_result()->fetch_assoc();
@@ -70,8 +70,11 @@ try {
         $id_sensor = (int) $sensor["id_sensor"];
         $valor_numerico = (float) $valor;
 
-        $insertar_medicion->bind_param("ids", $id_sensor, $valor_numerico, $unidad);
+        $sql_insertar = "INSERT INTO mediciones (id_sensor, $columna, fecha_hora) VALUES (?, ?, NOW())";
+        $insertar_medicion = $conexion->prepare($sql_insertar);
+        $insertar_medicion->bind_param("id", $id_sensor, $valor_numerico);
         $insertar_medicion->execute();
+        $insertar_medicion->close();
     }
 
     $conexion->commit();

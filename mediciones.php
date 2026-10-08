@@ -13,15 +13,15 @@ $biofiltro_actual = "PURO";
 $sql = "SELECT
             ts.nombre AS tipo_sensor,
             DATE_FORMAT(m.fecha_hora, '%Y-%m') AS mes,
-            AVG(m.valor) AS valor_promedio,
-            m.unidad,
+            AVG(CASE ts.nombre WHEN 'CO2' THEN m.co2 WHEN 'Temperatura' THEN m.temperatura WHEN 'Humedad' THEN m.humedad WHEN 'Calidad del aire' THEN m.co2 END) AS valor_promedio,
+            CASE ts.nombre WHEN 'CO2' THEN 'ADC' WHEN 'Temperatura' THEN '°C' WHEN 'Humedad' THEN '%' WHEN 'Calidad del aire' THEN 'ADC' END AS unidad,
             COUNT(m.id_medicion) AS total_mediciones
         FROM mediciones m
         INNER JOIN sensores s ON m.id_sensor = s.id_sensor
         INNER JOIN tipos_sensores ts ON s.id_tipo_sensor = ts.id_tipo_sensor
         INNER JOIN biofiltros b ON s.id_biofiltro = b.id_biofiltro
         WHERE b.nombre = ?
-        GROUP BY ts.nombre, DATE_FORMAT(m.fecha_hora, '%Y-%m'), m.unidad
+        GROUP BY ts.nombre, DATE_FORMAT(m.fecha_hora, '%Y-%m')
         ORDER BY ts.nombre ASC, mes ASC";
 
 $stmt = $conexion->prepare($sql);

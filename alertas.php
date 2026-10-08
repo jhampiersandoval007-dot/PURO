@@ -9,12 +9,12 @@ if (!isset($_SESSION["id_usuario"])) {
 
 $sql = "SELECT
             a.id_alerta,
-            a.tipo_alerta,
-            a.descripcion,
+            a.tipo AS tipo_alerta,
+            a.mensaje AS descripcion,
             a.nivel,
             a.fecha_hora,
-            m.valor,
-            m.unidad,
+            CASE ts.nombre WHEN 'CO2' THEN m.co2 WHEN 'Temperatura' THEN m.temperatura WHEN 'Humedad' THEN m.humedad WHEN 'Calidad del aire' THEN m.co2 END AS valor,
+            CASE ts.nombre WHEN 'CO2' THEN 'ADC' WHEN 'Temperatura' THEN '°C' WHEN 'Humedad' THEN '%' WHEN 'Calidad del aire' THEN 'ADC' END AS unidad,
             ts.nombre AS tipo_sensor,
             b.nombre AS biofiltro
         FROM alertas a

@@ -14,9 +14,8 @@ $sql = "SELECT
             rp.titulo,
             rp.descripcion,
             rp.fecha_generacion,
-            rp.formato,
             u.nombre AS usuario,
-            r.nombre_rol AS rol
+            r.nombre AS rol
         FROM reportes rp
         INNER JOIN usuarios u
             ON rp.id_usuario = u.id_usuario
@@ -197,7 +196,6 @@ $resultado = $conexion->query($sql);
                     <th>ID</th>
                     <th>Título</th>
                     <th>Descripción</th>
-                    <th>Formato</th>
                     <th>Generado por</th>
                     <th>Rol</th>
                     <th>Fecha de generación</th>
@@ -226,9 +224,6 @@ $resultado = $conexion->query($sql);
                             <?php echo htmlspecialchars($reporte["descripcion"]); ?>
                         </td>
 
-                        <td class="formato">
-                            <?php echo htmlspecialchars($reporte["formato"]); ?>
-                        </td>
 
                         <td>
                             <?php echo htmlspecialchars($reporte["usuario"]); ?>
@@ -250,7 +245,7 @@ $resultado = $conexion->query($sql);
 
                 <tr>
 
-                    <td colspan="7" class="sin-datos">
+                    <td colspan="6" class="sin-datos">
                         No existen reportes registrados.
                     </td>
 
