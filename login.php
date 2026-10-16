@@ -89,8 +89,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             $usuario = $resultado->fetch_assoc();
 
-            if ($password === $usuario["password"]) {
+            if (password_verify($password, $usuario["password"])) {
                 $login_correcto = true;
+
+                if (password_needs_rehash($usuario["password"], PASSWORD_DEFAULT)) {
+                    $new_hash = password_hash($password, PASSWORD_DEFAULT);
+                    $update_stmt = $conexion->prepare("UPDATE usuarios SET password = ? WHERE id_usuario = ?");
+                    $update_stmt->bind_param("si", $new_hash, $usuario["id_usuario"]);
+                    $update_stmt->execute();
+                    $update_stmt->close();
+                }
+            } elseif ($password === $usuario["password"]) {
+                $login_correcto = true;
+
+                $new_hash = password_hash($password, PASSWORD_DEFAULT);
+                $update_stmt = $conexion->prepare("UPDATE usuarios SET password = ? WHERE id_usuario = ?");
+                $update_stmt->bind_param("si", $new_hash, $usuario["id_usuario"]);
+                $update_stmt->execute();
+                $update_stmt->close();
             }
         }
 
