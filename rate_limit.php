@@ -1,9 +1,6 @@
 <?php
 
-// Iniciar sesión solo si todavía no está iniciada
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
+require_once "session_config.php";
 
 // Configuración del límite
 $limite_solicitudes = 20;
