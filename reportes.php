@@ -1,5 +1,5 @@
 <?php
-session_start();
+require_once "auth_check.php";
 require_once "conexion.php";
 
 // Verificar que exista una sesión activa
@@ -85,6 +85,13 @@ $resultado = $conexion->query($sql);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Reportes - PURO</title>
+    <script>
+        window.addEventListener("pageshow", function (event) {
+            if (event.persisted) {
+                window.location.reload();
+            }
+        });
+    </script>
 
     <style>
         * {

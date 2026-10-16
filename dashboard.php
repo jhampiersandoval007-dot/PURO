@@ -1,12 +1,7 @@
 <?php
-session_start();
+require_once "auth_check.php";
 require_once "rate_limit.php";
 require_once "conexion.php";
-
-if (!isset($_SESSION["id_usuario"])) {
-    header("Location: login.php");
-    exit();
-}
 
 $nombre = $_SESSION["nombre"] ?? "Usuario";
 $sqlCO2 = "SELECT m.co2
@@ -107,6 +102,13 @@ if ($resultadoHumedad && $resultadoHumedad->num_rows > 0) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Dashboard - PURO</title>
+    <script>
+        window.addEventListener("pageshow", function (event) {
+            if (event.persisted) {
+                window.location.reload();
+            }
+        });
+    </script>
 
     <style>
         * {

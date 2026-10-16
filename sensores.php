@@ -1,5 +1,5 @@
 <?php
-session_start();
+require_once "auth_check.php";
 require_once "conexion.php";
 
 if (!isset($_SESSION["id_usuario"])) {
@@ -31,6 +31,13 @@ $resultado = $conexion->query($sql);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sensores - PURO</title>
+    <script>
+        window.addEventListener("pageshow", function (event) {
+            if (event.persisted) {
+                window.location.reload();
+            }
+        });
+    </script>
 
     <style>
         * {
