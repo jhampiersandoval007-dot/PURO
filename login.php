@@ -35,11 +35,21 @@ if (isset($_SESSION["bloqueado_hasta"])) {
     }
 }
 
+if (empty($_SESSION["token_csrf_login"])) {
+    $_SESSION["token_csrf_login"] = bin2hex(random_bytes(32));
+}
+
 // Procesar formulario
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
+    $token = $_POST["token_csrf"] ?? "";
+
+    if (!hash_equals($_SESSION["token_csrf_login"] ?? "", $token)) {
+
+        $mensaje = "Solicitud no válida. Por favor, recargue la página e intente nuevamente.";
+
     // Acceso como invitado
-    if (isset($_POST["acceso_invitado"])) {
+    } elseif (isset($_POST["acceso_invitado"])) {
 
         $_SESSION["intentos_login"] = 0;
         unset($_SESSION["bloqueado_hasta"]);
@@ -48,6 +58,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION["nombre"] = "Invitado";
         $_SESSION["id_rol"] = null;
         $_SESSION["es_invitado"] = true;
+        unset($_SESSION["token_csrf_login"]);
 
         session_regenerate_id(true);
 
@@ -119,6 +130,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION["id_rol"] = $usuario["id_rol"];
 
             unset($_SESSION["es_invitado"]);
+            unset($_SESSION["token_csrf_login"]);
 
             session_regenerate_id(true);
 
@@ -206,6 +218,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         <!-- FORMULARIO ADMINISTRADOR -->
         <form method="POST" action="">
+            <input type="hidden" name="token_csrf" value="<?php echo htmlspecialchars($_SESSION["token_csrf_login"]); ?>">
 
             <div class="form-grupo">
 
@@ -285,6 +298,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         <!-- FORMULARIO INVITADO -->
         <form method="POST" action="" class="form-invitado">
+            <input type="hidden" name="token_csrf" value="<?php echo htmlspecialchars($_SESSION["token_csrf_login"]); ?>">
 
             <button
                 type="submit"
