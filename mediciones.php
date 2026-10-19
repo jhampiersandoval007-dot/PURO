@@ -87,30 +87,6 @@ function titulo_sensor($tipo_sensor)
 </head>
 <body>
 <?php $pagina_actual = 'mediciones'; require_once "sidebar.php"; ?>
-    <div class="subtitle">Biofiltración Urbana</div>
-    <a href="dashboard.php">Dashboard</a>
-    <a href="biofiltros.php">Biofiltros</a>
-    <a href="sensores.php">Sensores</a>
-    <a href="mediciones.php" class="activo-menu">Mediciones</a>
-    <a href="alertas.php">Alertas</a>
-    <?php if (empty($_SESSION["es_invitado"])): ?>
-        <a href="reportes.php">Reportes</a>
-    <?php endif; ?>
-    <a href="logout.php" class="cerrar-sesion">
-        <svg class="arr-1" viewBox="0 0 24 24" aria-hidden="true"><path d="M13 5l7 7-7 7v-4H4v-2h9V5z"/></svg>
-        <svg class="arr-2" viewBox="0 0 24 24" aria-hidden="true"><path d="M13 5l7 7-7 7v-4H4v-2h9V5z"/></svg>
-        <span class="circle"></span><span class="text">Cerrar sesión</span>
-    </a>
-</div>
-<main class="contenido">
-    <div class="encabezado">
-        <h1>Estadísticas de Mediciones</h1>
-        <p>Promedios mensuales registrados por los sensores del sistema PURO.</p>
-        <div class="resumen-mediciones">
-            <span class="indicador-activo"></span>
-            <span>PURO · <?php echo htmlspecialchars((string) $total_mediciones); ?> mediciones analizadas</span>
-        </div>
-    </div>
     <?php if (!empty($graficos)): ?>
         <section class="graficos-contenedor" aria-label="Gráficos mensuales de mediciones">
             <?php foreach ($graficos as $tipo_sensor => $datos): ?>

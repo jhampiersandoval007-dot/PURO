@@ -1,19 +1,8 @@
 <?php
-/**
- * PURO - Sidebar Flotante Glassmorphism con Expansión Hover
- * Roles soportados:
- *   - Administrador: 7 opciones (Dashboard, Biofiltros, Sensores, Mediciones, Alertas, Reportes, Cerrar sesión)
- *   - Invitado: 6 opciones (se oculta Reportes)
- */
 $pagina_actual = $pagina_actual ?? '';
 $es_invitado = !empty($_SESSION["es_invitado"]);
 ?>
 <style>
-/* =========================================================
-   PURO - SIDEBAR GLASSERMOPHISM INTERACTIVO (HOVER)
-   ========================================================= */
-
-/* Estructura base flotante centrada verticalmente */
 .sidebar {
     position: fixed !important;
     top: 50% !important;
@@ -21,38 +10,43 @@ $es_invitado = !empty($_SESSION["es_invitado"]);
     transform: translateY(-50%) !important;
     width: 70px !important;
     height: auto !important;
+    max-height: calc(100vh - 40px) !important;
     padding: 16px 10px !important;
     background: rgba(10, 32, 20, 0.78) !important;
-    backdrop-filter: blur(18px) saturate(140%) !important;
-    -webkit-backdrop-filter: blur(18px) saturate(140%) !important;
-    border: 1px solid rgba(165, 214, 167, 0.25) !important;
-    border-radius: 20px !important;
-    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.15) !important;
-    overflow: hidden !important;
+    backdrop-filter: blur(24px) saturate(160%) !important;
+    -webkit-backdrop-filter: blur(24px) saturate(160%) !important;
+    border: 1px solid rgba(165, 214, 167, 0.22) !important;
+    border-radius: 24px !important;
+    box-shadow: 0 24px 50px rgba(0, 0, 0, 0.55), inset 0 1px 1px rgba(255, 255, 255, 0.15) !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
     transition: width 0.35s cubic-bezier(0.4, 0, 0.2, 1), background 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease !important;
     z-index: 9999 !important;
     box-sizing: border-box !important;
 }
 
-/* Expansión al acercar el cursor (Hover) o foco */
+.sidebar::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+}
+
 .sidebar:hover,
 .sidebar:focus-within,
 .sidebar.open {
     width: 240px !important;
     background: rgba(8, 26, 16, 0.94) !important;
-    border-color: rgba(165, 214, 167, 0.42) !important;
-    box-shadow: 0 25px 55px rgba(0, 0, 0, 0.65), 0 0 30px rgba(76, 175, 80, 0.18), inset 0 1px 1px rgba(255, 255, 255, 0.22) !important;
+    border-color: rgba(165, 214, 167, 0.38) !important;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.65), 0 0 30px rgba(76, 175, 80, 0.16), inset 0 1px 1px rgba(255, 255, 255, 0.22) !important;
 }
 
-/* Encabezado / Logo */
 .sidebar .logo {
     display: flex !important;
     align-items: center !important;
     gap: 16px !important;
     height: 46px !important;
     padding: 0 8px !important;
-    margin-bottom: 14px !important;
-    border-bottom: 1px solid rgba(165, 214, 167, 0.14) !important;
+    margin-bottom: 12px !important;
+    border-bottom: 1px solid rgba(165, 214, 167, 0.12) !important;
     white-space: nowrap !important;
     overflow: hidden !important;
     cursor: pointer !important;
@@ -81,7 +75,7 @@ $es_invitado = !empty($_SESSION["es_invitado"]);
 .sidebar .logo-name {
     font-size: 19px !important;
     font-weight: 800 !important;
-    letter-spacing: 2px !important;
+    letter-spacing: 2.5px !important;
     color: #ffffff !important;
     opacity: 0 !important;
     pointer-events: none !important;
@@ -98,14 +92,13 @@ $es_invitado = !empty($_SESSION["es_invitado"]);
     transform: translateX(0) !important;
 }
 
-/* Lista de navegación */
 .sidebar ul.menu-list {
     list-style: none !important;
     padding: 0 !important;
     margin: 0 !important;
     display: flex !important;
     flex-direction: column !important;
-    gap: 7px !important;
+    gap: 6px !important;
 }
 
 .sidebar ul.menu-list li {
@@ -119,12 +112,12 @@ $es_invitado = !empty($_SESSION["es_invitado"]);
     display: flex !important;
     align-items: center !important;
     gap: 16px !important;
-    height: 46px !important;
+    height: 44px !important;
     padding: 0 9px !important;
     color: #c8d6cb !important;
     text-decoration: none !important;
     white-space: nowrap !important;
-    border-radius: 12px !important;
+    border-radius: 14px !important;
     border: 1px solid transparent !important;
     background: transparent !important;
     overflow: hidden !important;
@@ -155,7 +148,7 @@ $es_invitado = !empty($_SESSION["es_invitado"]);
 .sidebar .link-name {
     font-size: 14px !important;
     font-weight: 600 !important;
-    letter-spacing: 0.3px !important;
+    letter-spacing: 0.2px !important;
     opacity: 0 !important;
     pointer-events: none !important;
     transform: translateX(-10px) !important;
@@ -171,10 +164,9 @@ $es_invitado = !empty($_SESSION["es_invitado"]);
     transform: translateX(0) !important;
 }
 
-/* Efecto hover en opciones individuales */
 .sidebar ul.menu-list a:hover {
     color: #ffffff !important;
-    background: rgba(102, 187, 106, 0.18) !important;
+    background: rgba(102, 187, 106, 0.16) !important;
     border-color: rgba(165, 214, 167, 0.28) !important;
     box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2) !important;
     transform: translateX(3px) !important;
@@ -182,47 +174,33 @@ $es_invitado = !empty($_SESSION["es_invitado"]);
 
 .sidebar ul.menu-list a:hover .icon {
     color: #81c784 !important;
-    transform: scale(1.1) !important;
+    transform: scale(1.08) !important;
 }
 
-/* Opción activa (Glassmorphism verde esmeralda) */
 .sidebar ul.menu-list li.active a,
 .sidebar ul.menu-list a.activo-menu {
     color: #ffffff !important;
-    background: linear-gradient(135deg, rgba(76, 175, 80, 0.4), rgba(46, 125, 50, 0.22)) !important;
-    border: 1px solid rgba(165, 214, 167, 0.45) !important;
-    box-shadow: 0 6px 18px rgba(46, 125, 50, 0.3), inset 0 1px 1px rgba(255, 255, 255, 0.25) !important;
+    background: linear-gradient(135deg, rgba(76, 175, 80, 0.38), rgba(46, 125, 50, 0.22)) !important;
+    border: 1px solid rgba(165, 214, 167, 0.42) !important;
+    box-shadow: 0 6px 18px rgba(46, 125, 50, 0.28), inset 0 1px 1px rgba(255, 255, 255, 0.22) !important;
 }
 
 .sidebar ul.menu-list li.active a .icon,
 .sidebar ul.menu-list a.activo-menu .icon {
     color: #ffffff !important;
-    filter: drop-shadow(0 0 6px rgba(102, 187, 106, 0.8)) !important;
+    filter: drop-shadow(0 0 6px rgba(102, 187, 106, 0.75)) !important;
 }
 
-/* Botón Cerrar Sesión (Opción 7 / 6) */
-.sidebar .logout-box {
+.sidebar li.sidebar-item-logout {
     margin-top: 10px !important;
     padding-top: 10px !important;
     border-top: 1px solid rgba(165, 214, 167, 0.14) !important;
 }
 
 .sidebar a.btn-logout {
-    display: flex !important;
-    align-items: center !important;
-    gap: 16px !important;
-    height: 46px !important;
-    padding: 0 9px !important;
     color: #ffb4ac !important;
-    text-decoration: none !important;
-    white-space: nowrap !important;
-    border-radius: 12px !important;
-    border: 1px solid rgba(255, 138, 128, 0.25) !important;
-    background: rgba(143, 55, 43, 0.24) !important;
-    backdrop-filter: blur(12px) !important;
-    overflow: hidden !important;
-    transition: all 0.25s ease !important;
-    box-sizing: border-box !important;
+    background: rgba(143, 55, 43, 0.22) !important;
+    border: 1px solid rgba(255, 138, 128, 0.24) !important;
 }
 
 .sidebar a.btn-logout .icon {
@@ -232,31 +210,29 @@ $es_invitado = !empty($_SESSION["es_invitado"]);
 .sidebar a.btn-logout:hover {
     color: #ffffff !important;
     background: linear-gradient(135deg, rgba(211, 47, 47, 0.55), rgba(183, 28, 28, 0.38)) !important;
-    border-color: rgba(255, 138, 128, 0.6) !important;
-    box-shadow: 0 6px 20px rgba(211, 47, 47, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.25) !important;
+    border-color: rgba(255, 138, 128, 0.55) !important;
+    box-shadow: 0 6px 20px rgba(211, 47, 47, 0.38), inset 0 1px 1px rgba(255, 255, 255, 0.25) !important;
     transform: translateX(3px) !important;
 }
 
 .sidebar a.btn-logout:hover .icon {
     color: #ffffff !important;
-    transform: scale(1.1) !important;
+    transform: scale(1.08) !important;
 }
 
-/* Desplazamiento del contenido para no chocar con el sidebar */
 .contenido,
 main {
     margin-left: 110px !important;
     transition: margin-left 0.35s ease !important;
 }
 
-/* Dispositivos móviles / pantallas estrechas */
 @media (max-width: 800px) {
     .sidebar {
         top: auto !important;
-        bottom: 12px !important;
-        left: 10px !important;
+        bottom: 14px !important;
+        left: 12px !important;
         transform: none !important;
-        width: 60px !important;
+        width: 62px !important;
         padding: 10px 6px !important;
     }
 
@@ -266,15 +242,14 @@ main {
 
     .contenido,
     main {
-        margin-left: 80px !important;
-        padding: 20px 14px !important;
+        margin-left: 82px !important;
+        padding: 22px 14px !important;
     }
 }
 </style>
 
 <nav class="sidebar" id="sidebar" aria-label="Navegación lateral">
 
-    <!-- Logo / Encabezado -->
     <div class="logo" id="menuToggle" title="PURO · Biofiltración Urbana">
         <span class="logo-icon" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
@@ -285,25 +260,22 @@ main {
         <span class="logo-name">PURO</span>
     </div>
 
-    <!-- Opciones del menú -->
     <ul class="menu-list" id="menu">
 
-        <!-- 1. Dashboard -->
         <li class="<?php echo $pagina_actual === 'dashboard' ? 'active' : ''; ?>">
             <a href="dashboard.php" class="<?php echo $pagina_actual === 'dashboard' ? 'activo-menu' : ''; ?>" title="Dashboard">
                 <span class="icon" aria-hidden="true">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <rect x="3" y="3" width="7" height="9" rx="1"/>
-                        <rect x="14" y="3" width="7" height="5" rx="1"/>
-                        <rect x="14" y="12" width="7" height="9" rx="1"/>
-                        <rect x="3" y="16" width="7" height="5" rx="1"/>
+                        <rect x="3" y="3" width="7" height="9" rx="1.5"/>
+                        <rect x="14" y="3" width="7" height="5" rx="1.5"/>
+                        <rect x="14" y="12" width="7" height="9" rx="1.5"/>
+                        <rect x="3" y="16" width="7" height="5" rx="1.5"/>
                     </svg>
                 </span>
                 <span class="link-name">Dashboard</span>
             </a>
         </li>
 
-        <!-- 2. Biofiltros -->
         <li class="<?php echo $pagina_actual === 'biofiltros' ? 'active' : ''; ?>">
             <a href="biofiltros.php" class="<?php echo $pagina_actual === 'biofiltros' ? 'activo-menu' : ''; ?>" title="Biofiltros">
                 <span class="icon" aria-hidden="true">
@@ -318,13 +290,12 @@ main {
             </a>
         </li>
 
-        <!-- 3. Sensores -->
         <li class="<?php echo $pagina_actual === 'sensores' ? 'active' : ''; ?>">
             <a href="sensores.php" class="<?php echo $pagina_actual === 'sensores' ? 'activo-menu' : ''; ?>" title="Sensores">
                 <span class="icon" aria-hidden="true">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <rect x="4" y="4" width="16" height="16" rx="2"/>
-                        <rect x="9" y="9" width="6" height="6"/>
+                        <rect x="4" y="4" width="16" height="16" rx="3"/>
+                        <rect x="9" y="9" width="6" height="6" rx="1"/>
                         <line x1="9" y1="1" x2="9" y2="4"/>
                         <line x1="15" y1="1" x2="15" y2="4"/>
                         <line x1="9" y1="20" x2="9" y2="23"/>
@@ -339,7 +310,6 @@ main {
             </a>
         </li>
 
-        <!-- 4. Mediciones -->
         <li class="<?php echo $pagina_actual === 'mediciones' ? 'active' : ''; ?>">
             <a href="mediciones.php" class="<?php echo $pagina_actual === 'mediciones' ? 'activo-menu' : ''; ?>" title="Mediciones">
                 <span class="icon" aria-hidden="true">
@@ -354,7 +324,6 @@ main {
             </a>
         </li>
 
-        <!-- 5. Alertas -->
         <li class="<?php echo $pagina_actual === 'alertas' ? 'active' : ''; ?>">
             <a href="alertas.php" class="<?php echo $pagina_actual === 'alertas' ? 'activo-menu' : ''; ?>" title="Alertas">
                 <span class="icon" aria-hidden="true">
@@ -367,7 +336,6 @@ main {
             </a>
         </li>
 
-        <!-- 6. Reportes (Solo disponible para Administrador / Usuario, no para Invitado) -->
         <?php if (!$es_invitado): ?>
         <li class="<?php echo $pagina_actual === 'reportes' ? 'active' : ''; ?>">
             <a href="reportes.php" class="<?php echo $pagina_actual === 'reportes' ? 'activo-menu' : ''; ?>" title="Reportes">
@@ -385,21 +353,20 @@ main {
         </li>
         <?php endif; ?>
 
-    </ul>
+        <li class="sidebar-item-logout">
+            <a href="logout.php" class="btn-logout" title="Cerrar sesión">
+                <span class="icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+                        <polyline points="16 17 21 12 16 7"/>
+                        <line x1="21" y1="12" x2="9" y2="12"/>
+                    </svg>
+                </span>
+                <span class="link-name">Cerrar sesión</span>
+            </a>
+        </li>
 
-    <!-- 7. Cerrar sesión (6 para invitados) -->
-    <div class="logout-box">
-        <a href="logout.php" class="btn-logout" title="Cerrar sesión">
-            <span class="icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
-                    <polyline points="16 17 21 12 16 7"/>
-                    <line x1="21" y1="12" x2="9" y2="12"/>
-                </svg>
-            </span>
-            <span class="link-name">Cerrar sesión</span>
-        </a>
-    </div>
+    </ul>
 
 </nav>
 
