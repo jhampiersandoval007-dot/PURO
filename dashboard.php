@@ -123,55 +123,6 @@ if ($resultadoHumedad && $resultadoHumedad->num_rows > 0) {
             color: #263238;
         }
 
-        .sidebar {
-            position: fixed;
-            width: 230px;
-            height: 100vh;
-            background: #123c32;
-            color: white;
-            padding: 30px 20px;
-        }
-
-        .logo {
-            font-size: 32px;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-
-        .subtitle {
-            font-size: 12px;
-            color: #b8d5cd;
-            margin-bottom: 40px;
-        }
-
-        .sidebar a {
-            display: block;
-            color: white;
-            text-decoration: none;
-            padding: 13px;
-            margin-bottom: 8px;
-            border-radius: 6px;
-        }
-
-        .sidebar a:hover,
-        .sidebar .activo-menu {
-            background: #1f5d4d;
-        }
-
-        .sidebar .cerrar-sesion {
-            margin-top: 35px;
-            background: #a83232;
-            text-align: center;
-        }
-
-        .sidebar .cerrar-sesion:hover {
-            background: #8b2929;
-        }
-
-        .contenido {
-            margin-left: 230px;
-            padding: 35px;
-        }
 
         .encabezado {
             margin-bottom: 30px;
@@ -232,28 +183,7 @@ if ($resultadoHumedad && $resultadoHumedad->num_rows > 0) {
 
 <body>
 
-<div class="sidebar">
-
-    <div class="logo">PURO</div>
-    <div class="subtitle">Biofiltración Urbana</div>
-
-    <a href="dashboard.php" class="activo-menu">Dashboard</a>
-    <a href="biofiltros.php">Biofiltros</a>
-    <a href="sensores.php">Sensores</a>
-    <a href="mediciones.php">Mediciones</a>
-    <a href="alertas.php">Alertas</a>
-    <?php if (empty($_SESSION["es_invitado"])): ?>
-        <a href="reportes.php">Reportes</a>
-    <?php endif; ?>
-
-    <a href="logout.php" class="cerrar-sesion">
-        <svg class="arr-1" viewBox="0 0 24 24" aria-hidden="true"><path d="M13 5l7 7-7 7v-4H4v-2h9V5z"/></svg>
-        <svg class="arr-2" viewBox="0 0 24 24" aria-hidden="true"><path d="M13 5l7 7-7 7v-4H4v-2h9V5z"/></svg>
-        <span class="circle"></span>
-        <span class="text">Cerrar sesión</span>
-    </a>
-
-</div>
+<?php $pagina_actual = 'dashboard'; require_once "sidebar.php"; ?>
 
 
 <div class="contenido">

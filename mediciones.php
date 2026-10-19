@@ -86,8 +86,7 @@ function titulo_sensor($tipo_sensor)
     </style>
 </head>
 <body>
-<div class="sidebar">
-    <div class="logo">PURO</div>
+<?php $pagina_actual = 'mediciones'; require_once "sidebar.php"; ?>
     <div class="subtitle">Biofiltración Urbana</div>
     <a href="dashboard.php">Dashboard</a>
     <a href="biofiltros.php">Biofiltros</a>

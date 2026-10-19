@@ -59,56 +59,6 @@ $resultado = $conexion->query($sql);
             color: #263238;
         }
 
-        .sidebar {
-            position: fixed;
-            width: 230px;
-            height: 100vh;
-            background: #123c32;
-            color: white;
-            padding: 30px 20px;
-        }
-
-        .logo {
-            font-size: 32px;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-
-        .subtitle {
-            font-size: 12px;
-            color: #b8d5cd;
-            margin-bottom: 40px;
-        }
-
-        .sidebar a {
-            display: block;
-            color: white;
-            text-decoration: none;
-            padding: 13px;
-            margin-bottom: 8px;
-            border-radius: 6px;
-        }
-
-        .sidebar a:hover,
-        .sidebar .activo-menu {
-            background: #1f5d4d;
-        }
-
-        .sidebar .cerrar-sesion {
-            margin-top: 35px;
-            background: #a83232;
-            text-align: center;
-        }
-
-        .sidebar .cerrar-sesion:hover {
-            background: #8b2929;
-        }
-
-        .contenido {
-            margin-left: 230px;
-            padding: 35px;
-        }
-
         .encabezado {
             margin-bottom: 30px;
         }
@@ -173,9 +123,7 @@ $resultado = $conexion->query($sql);
 
 <body>
 
-<div class="sidebar">
-
-    <div class="logo">PURO</div>
+<?php $pagina_actual = 'alertas'; require_once "sidebar.php"; ?>
     <div class="subtitle">Biofiltración Urbana</div>
 
     <a href="dashboard.php">Dashboard</a>
