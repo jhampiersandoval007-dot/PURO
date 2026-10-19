@@ -191,7 +191,7 @@ $resultado = $conexion->query($sql);
             font-size: 14px;
         }
     </style>
-    <link rel="stylesheet" href="panel.css?v=20261008-historia">
+    <link rel="stylesheet" href="panel.css?v=20261019-glass-sidebar">
 </head>
 
 <body>

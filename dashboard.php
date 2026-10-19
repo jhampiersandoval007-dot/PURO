@@ -177,7 +177,7 @@ if ($resultadoHumedad && $resultadoHumedad->num_rows > 0) {
             }
         }
     </style>
-    <link rel="stylesheet" href="panel.css?v=20261008-historia-social">
+    <link rel="stylesheet" href="panel.css?v=20261019-glass-sidebar">
 
 </head>
 

@@ -100,7 +100,7 @@ $resultado = $conexion->query($sql);
             padding: 30px;
         }
     </style>
-    <link rel="stylesheet" href="panel.css?v=20261008-historia">
+    <link rel="stylesheet" href="panel.css?v=20261019-glass-sidebar">
 </head>
 
 <body>
